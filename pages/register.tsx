@@ -31,8 +31,7 @@ const RegisterPage = () => {
         password: input.password,
       })
       .then((response) => {
-        console.log("User profile", response.data.user);
-        console.log("User token", response.data.jwt);
+        document.cookie = "Bearer " + response.data.jwt;
       })
       .catch((error) => {
         console.log("An error occurred:", error.response);
