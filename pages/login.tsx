@@ -1,8 +1,11 @@
 import { ChangeEvent, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
+  const router = useRouter();
+
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -39,6 +42,11 @@ const LoginPage = () => {
         Authorization: cookie,
       },
     });
+    if (puppyResponse.data.length === 1) {
+      router.push("/puppy");
+    } else {
+      router.push("/new-puppy");
+    }
   };
 
   return (
