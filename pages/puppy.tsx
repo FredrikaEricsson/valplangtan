@@ -5,8 +5,8 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 
 interface IPuppy {
-  birthDate: string;
-  name: string;
+  BirthDate: string;
+  Name: string;
   id: Number;
 }
 
@@ -38,11 +38,13 @@ const PuppyPage = () => {
     getPuppy();
   }, [router]);
 
+  console.log(puppy);
+
   if (!puppy) {
     return <div>Loading...</div>;
   }
 
-  return <div>Din valp {puppy.name}</div>;
+  return <div>Din valp {puppy.Name}</div>;
 };
 
 export default PuppyPage;
