@@ -27,6 +27,7 @@ const PuppyPage = () => {
       }
       let puppyResponse = await axios.get<IPuppyResponse>(
         "http://localhost:1337/api/puppy/me",
+
         {
           headers: {
             Authorization: cookie,
