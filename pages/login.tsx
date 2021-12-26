@@ -45,7 +45,7 @@ const LoginPage = () => {
     if (puppyResponse.data.length === 1) {
       router.push("/puppy");
     } else {
-      router.push("/new-puppy");
+      router.push("/add-new-puppy");
     }
   };
 

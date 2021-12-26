@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 
 interface IPuppy {
-  BirtDate: string;
+  BirthDate: string;
   Name: string;
   id: Number;
 }
@@ -27,6 +27,7 @@ const PuppyPage = () => {
       }
       let puppyResponse = await axios.get<IPuppyResponse>(
         "http://localhost:1337/api/puppy/me",
+
         {
           headers: {
             Authorization: cookie,
@@ -37,6 +38,8 @@ const PuppyPage = () => {
     };
     getPuppy();
   }, [router]);
+
+  console.log(puppy);
 
   if (!puppy) {
     return <div>Loading...</div>;
