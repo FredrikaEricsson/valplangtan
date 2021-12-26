@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import router from "next/router";
 
 const RegisterPage = () => {
   const [input, setInput] = useState({
@@ -79,24 +80,17 @@ const RegisterPage = () => {
     });
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    let response = axios.post("http://localhost:3001/register-user");
-    console.log(response);
-
-    /*  axios
-      .post("http://localhost:1337/api/auth/local/register", {
-        username: input.username,
-        email: input.email,
-        password: input.password,
-      })
-      .then((response) => {
-        let cookie = "Bearer " + response.data.jwt;
-        Cookies.set("token", cookie, { expires: 7 });
-      })
-      .catch((error) => {
-        console.log("An error occurred:", error.response);
-      }); */
+    let response = await axios.post(
+      "http://localhost:3001/register-user",
+      input
+    );
+    if (response.status === 200) {
+      return router.push("/login");
+    } else {
+      console.log("Det fungerar inte");
+    }
   };
 
   return (
