@@ -26,8 +26,16 @@ const LoginPage = () => {
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    let response = await axios.post("http://localhost:3001/login", input, {
+      withCredentials: true,
+    });
+    if (response.status === 200) {
+      return router.push("/add-new-puppy");
+    } else {
+      console.log("Det fungerar inte");
+    }
 
-    let loginResponse = await axios.post(
+    /*     let loginResponse = await axios.post(
       "http://localhost:1337/api/auth/local",
       {
         identifier: input.email,
@@ -46,7 +54,7 @@ const LoginPage = () => {
       router.push("/puppy");
     } else {
       router.push("/add-new-puppy");
-    }
+    } */
   };
 
   return (
