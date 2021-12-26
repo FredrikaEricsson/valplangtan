@@ -42,33 +42,35 @@ const AddNewPuppy = () => {
     });
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     let cookie = Cookies.get("token");
     if (!cookie) {
       return router.push("/login");
     }
-    axios
-      .post(
-        "http://localhost:1337/api/puppy",
-        {
-          data: {
-            Name: puppy.Name,
-            BirthDate: puppy.BirthDate,
-          },
+    let user = await axios.get("http://localhost:1337/api/users/me", {
+      headers: {
+        Authorization: cookie,
+      },
+    });
+
+    console.log(user);
+
+    let addPuppy = await axios.post(
+      "http://localhost:1337/api/puppy",
+      {
+        data: {
+          Name: puppy.Name,
+          BirthDate: puppy.BirthDate,
+          user: user.data.id,
         },
-        {
-          headers: {
-            Authorization: cookie,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log("An error occurred:", error.response);
-      });
+      },
+      {
+        headers: {
+          Authorization: cookie,
+        },
+      }
+    );
   };
 
   return (
