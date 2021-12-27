@@ -4,19 +4,21 @@ import "react-calendar/dist/Calendar.css";
 import { ChangeEvent, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import router from "next/router";
+import { useRouter } from "next/router";
 
 interface INewPuppy {
-  BirthDate: DateTime;
-  Name: string;
+  birthDate: DateTime;
+  name: string;
 }
 
 const AddNewPuppy = () => {
+  const router = useRouter();
+
   let dt = DateTime.now();
 
   const [puppy, setPuppy] = useState<INewPuppy>({
-    Name: "",
-    BirthDate: dt,
+    name: "",
+    birthDate: dt,
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,18 +35,31 @@ const AddNewPuppy = () => {
   };
 
   const handleDateChange = (selectedDate: Date) => {
-    let BirthDate = DateTime.fromJSDate(selectedDate);
+    let birthDate = DateTime.fromJSDate(selectedDate);
     setPuppy((prevInput) => {
       return {
         ...prevInput,
-        BirthDate,
+        birthDate,
       };
     });
   };
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    let cookie = Cookies.get("token");
+    let response = await axios.post(
+      "http://localhost:3001/add-new-puppy",
+      puppy,
+      {
+        withCredentials: true,
+      }
+    );
+    if (response.status === 200) {
+      return router.push("/puppy");
+    } else {
+      console.log("Det funkar inte");
+    }
+
+    /* let cookie = Cookies.get("token");
     if (!cookie) {
       return router.push("/login");
     }
@@ -70,13 +85,13 @@ const AddNewPuppy = () => {
           Authorization: cookie,
         },
       }
-    );
+    ); */
   };
 
   return (
     <>
       <form action=''>
-        <input type='text' name='Name' onChange={handleChange} />
+        <input type='text' name='name' onChange={handleChange} />
         <Calendar
           minDate={dt.minus({ years: 1 }).toJSDate()}
           maxDate={dt.toJSDate()}

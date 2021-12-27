@@ -1,17 +1,10 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import useSWR from "swr";
-import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 
 interface IPuppy {
-  BirthDate: string;
-  Name: string;
-  id: Number;
-}
-
-interface IPuppyResponse {
-  [index: number]: { attributes: IPuppy };
+  birthDate: string;
+  name: string;
 }
 
 const PuppyPage = () => {
@@ -21,31 +14,23 @@ const PuppyPage = () => {
 
   useEffect(() => {
     const getPuppy = async () => {
-      let cookie = Cookies.get("token");
-      if (!cookie) {
-        return router.push("/login");
-      }
-      let puppyResponse = await axios.get<IPuppyResponse>(
-        "http://localhost:1337/api/puppy/me",
-
+      let puppyResponse = await axios.get<IPuppy>(
+        "http://localhost:3001/get-puppy",
         {
-          headers: {
-            Authorization: cookie,
-          },
+          withCredentials: true,
         }
       );
-      setPuppy(puppyResponse.data[0].attributes);
+
+      setPuppy(puppyResponse.data);
     };
     getPuppy();
   }, [router]);
-
-  console.log(puppy);
 
   if (!puppy) {
     return <div>Loading...</div>;
   }
 
-  return <div>Din valp {puppy.Name}</div>;
+  return <div>Din valp {puppy.name}</div>;
 };
 
 export default PuppyPage;
