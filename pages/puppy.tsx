@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { DateTime } from "luxon";
 
 interface IPuppy {
   birthDate: string;
+  ageInWeeks: number;
   name: string;
 }
 
@@ -20,8 +22,15 @@ const PuppyPage = () => {
           withCredentials: true,
         }
       );
+      let dt = DateTime.now();
+      let puppyBirthDate = DateTime.fromISO(puppyResponse.data.birthDate);
+      let puppyAge = dt.diff(puppyBirthDate, ["weeks"]);
 
-      setPuppy(puppyResponse.data);
+      setPuppy({
+        birthDate: puppyResponse.data.birthDate,
+        ageInWeeks: Math.floor(parseInt(puppyAge.weeks.toString())),
+        name: puppyResponse.data.name,
+      });
     };
     getPuppy();
   }, [router]);
@@ -30,7 +39,12 @@ const PuppyPage = () => {
     return <div>Loading...</div>;
   }
 
-  return <div>Din valp {puppy.name}</div>;
+  return (
+    <>
+      <div>Din valp {puppy.name}</div>
+      <div>är {puppy.ageInWeeks} vecka gammal</div>
+    </>
+  );
 };
 
 export default PuppyPage;
