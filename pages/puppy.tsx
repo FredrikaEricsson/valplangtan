@@ -9,33 +9,46 @@ interface IPuppy {
   name: string;
 }
 
+interface IPuppyResponse {
+  birthDate: string;
+  ageInWeeks: number;
+  name: string;
+  updateByWeek: string;
+}
+
+interface IPuppyUpdate {
+  content: string;
+}
+
 const PuppyPage = () => {
   const [puppy, setPuppy] = useState<IPuppy>();
-
+  const [update, setUpdate] = useState<IPuppyUpdate>();
   const router = useRouter();
 
   useEffect(() => {
     const getPuppy = async () => {
-      let puppyResponse = await axios.get<IPuppy>(
+      let puppyResponse = await axios.get<IPuppyResponse>(
         "http://localhost:3001/get-puppy",
         {
           withCredentials: true,
         }
       );
-      let dt = DateTime.now();
+      /*  let dt = DateTime.now();
       let puppyBirthDate = DateTime.fromISO(puppyResponse.data.birthDate);
-      let puppyAge = dt.diff(puppyBirthDate, ["weeks"]);
-
+      let puppyAge = dt.diff(puppyBirthDate, ["weeks"]); */
       setPuppy({
         birthDate: puppyResponse.data.birthDate,
-        ageInWeeks: Math.floor(parseInt(puppyAge.weeks.toString())),
+        ageInWeeks: puppyResponse.data.ageInWeeks,
         name: puppyResponse.data.name,
+      });
+      setUpdate({
+        content: puppyResponse.data.updateByWeek,
       });
     };
     getPuppy();
   }, [router]);
 
-  if (!puppy) {
+  if (!puppy || !update) {
     return <div>Loading...</div>;
   }
 
@@ -43,6 +56,7 @@ const PuppyPage = () => {
     <>
       <div>Din valp {puppy.name}</div>
       <div>är {puppy.ageInWeeks} vecka gammal</div>
+      <div>{update?.content}</div>
     </>
   );
 };
