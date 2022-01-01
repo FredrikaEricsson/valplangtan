@@ -33,9 +33,7 @@ const PuppyPage = () => {
           withCredentials: true,
         }
       );
-      /*  let dt = DateTime.now();
-      let puppyBirthDate = DateTime.fromISO(puppyResponse.data.birthDate);
-      let puppyAge = dt.diff(puppyBirthDate, ["weeks"]); */
+
       setPuppy({
         birthDate: puppyResponse.data.birthDate,
         ageInWeeks: puppyResponse.data.ageInWeeks,
