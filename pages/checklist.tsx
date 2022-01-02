@@ -3,14 +3,16 @@ import axios from "axios";
 import TaskList from "../components/taskList";
 
 interface ITask {
+  _id: string;
   week: string;
   isDone: boolean;
   title: string;
   slides: [{ description: string }];
 }
 
-interface IPuppyAge {
-  puppyAge: string;
+interface ITaskResponse {
+  id: string;
+  status: string;
 }
 
 const ChecklistPage = () => {
@@ -45,11 +47,23 @@ const ChecklistPage = () => {
     getTasks();
   }, [puppyAge]);
 
+  const changeTaskStatus = async (editedTask: ITaskResponse) => {
+    let editedTaskResponse = await axios.put(
+      "http://localhost:3001/edit-task",
+      editedTask
+    );
+    setTasks(editedTaskResponse.data);
+  };
+
   return (
     <>
       {tasks && puppyAge ? (
         <>
-          <TaskList tasks={tasks} puppyAge={puppyAge}></TaskList>
+          <TaskList
+            tasks={tasks}
+            puppyAge={puppyAge}
+            changeTaskStatus={changeTaskStatus}
+          ></TaskList>
         </>
       ) : null}
     </>
