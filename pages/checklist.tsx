@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import TaskList from "../components/taskList";
+import SlidesList from "../components/slidesList";
 
 interface ITask {
   _id: string;
   week: string;
   isDone: boolean;
   title: string;
-  slides: [{ description: string }];
+  slides: [{ _id: string; description: string }];
 }
 
 interface ITaskResponse {

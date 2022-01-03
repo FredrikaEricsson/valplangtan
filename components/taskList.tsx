@@ -1,11 +1,17 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import SlidesList from "./slidesList";
 
 interface ITask {
   _id: string;
   week: string;
   isDone: boolean;
   title: string;
-  slides: [{ description: string }];
+  slides: [
+    {
+      _id: string;
+      description: string;
+    }
+  ];
 }
 
 interface ITaskListProps {
@@ -18,6 +24,11 @@ const TaskList = (props: ITaskListProps) => {
   console.log(props.tasks);
   const [currentTasks, setCurrentTasks] = useState<ITask[]>([]);
   const [previousTasks, setPreviousTasks] = useState<ITask[]>([]);
+  const [showSlides, setShowSlides] = useState<boolean>(false);
+
+  const toggleSlides = () => {
+    setShowSlides(!showSlides);
+  };
 
   useEffect(() => {
     let filteredCurrentTasks = props.tasks.filter((task) => {
@@ -54,7 +65,16 @@ const TaskList = (props: ITaskListProps) => {
                 checked={currentTask.isDone}
                 onChange={handleChange}
               ></input>
-              <span>{currentTask.title}</span>
+              <div onClick={toggleSlides}>
+                <span>{currentTask.title}</span>
+              </div>
+
+              {showSlides ? (
+                <SlidesList
+                  slides={currentTask.slides}
+                  toggleSlides={toggleSlides}
+                ></SlidesList>
+              ) : null}
             </div>
           );
         })}
@@ -70,7 +90,15 @@ const TaskList = (props: ITaskListProps) => {
                 checked={previousTask.isDone}
                 onChange={handleChange}
               />
-              <span>{previousTask.title}</span>
+              <div onClick={toggleSlides}>
+                <span>{previousTask.title}</span>
+              </div>
+              {showSlides ? (
+                <SlidesList
+                  slides={previousTask.slides}
+                  toggleSlides={toggleSlides}
+                ></SlidesList>
+              ) : null}
             </div>
           );
         })}
