@@ -58,34 +58,6 @@ const AddNewPuppy = () => {
     } else {
       console.log("Det funkar inte");
     }
-
-    /* let cookie = Cookies.get("token");
-    if (!cookie) {
-      return router.push("/login");
-    }
-    let user = await axios.get("http://localhost:1337/api/users/me", {
-      headers: {
-        Authorization: cookie,
-      },
-    });
-
-    console.log(user);
-
-    let addPuppy = await axios.post(
-      "http://localhost:1337/api/puppy",
-      {
-        data: {
-          Name: puppy.Name,
-          BirthDate: puppy.BirthDate,
-          user: user.data.id,
-        },
-      },
-      {
-        headers: {
-          Authorization: cookie,
-        },
-      }
-    ); */
   };
 
   return (
