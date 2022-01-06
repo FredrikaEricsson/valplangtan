@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import TaskList from "../components/taskList";
 import SlidesList from "../components/slidesList";
@@ -13,7 +13,7 @@ interface ITask {
 
 interface ITaskResponse {
   id: string;
-  status: string;
+  isDone: boolean;
 }
 
 const ChecklistPage = () => {
@@ -48,12 +48,24 @@ const ChecklistPage = () => {
     getTasks();
   }, [puppyAge]);
 
+  useEffect(() => {
+    const onbeforeunloadFn = async () => {
+      await axios.put<ITask[]>("http://localhost:3001/edit-many-tasks", tasks);
+    };
+
+    window.addEventListener("beforeunload", onbeforeunloadFn);
+    return () => {
+      window.removeEventListener("beforeunload", onbeforeunloadFn);
+    };
+  }, [tasks]);
+
   const changeTaskStatus = async (editedTask: ITaskResponse) => {
-    let editedTaskResponse = await axios.put(
-      "http://localhost:3001/edit-task",
-      editedTask
-    );
-    setTasks(editedTaskResponse.data);
+    let taskToBeUpdated = tasks?.find((task) => {
+      return task._id === editedTask.id;
+    });
+    if (taskToBeUpdated) {
+      taskToBeUpdated.isDone = editedTask.isDone;
+    }
   };
 
   return (
