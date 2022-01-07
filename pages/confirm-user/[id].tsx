@@ -22,7 +22,15 @@ const ConfirmationPage = () => {
       });
   }, [id]);
 
-  return <></>;
+  return (
+    <>
+      {confirmUserResponse.loading ? (
+        <h2>{confirmUserResponse.message}</h2>
+      ) : (
+        <div>Laddar...</div>
+      )}
+    </>
+  );
 };
 
 export default ConfirmationPage;

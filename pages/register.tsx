@@ -1,7 +1,5 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
-import router from "next/router";
 
 const RegisterPage = () => {
   const [input, setInput] = useState({
@@ -87,7 +85,7 @@ const RegisterPage = () => {
       input
     );
     if (response.status === 200) {
-      return router.push("/login");
+      console.log("Registerring klar");
     } else {
       console.log("Det fungerar inte");
     }
