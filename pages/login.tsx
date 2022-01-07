@@ -48,6 +48,9 @@ const LoginPage = () => {
       <Link href='/register'>
         <a>Registera</a>
       </Link>
+      <Link href='/forgot-password'>
+        <a>Glömt lösenord?</a>
+      </Link>
     </>
   );
 };

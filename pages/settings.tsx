@@ -3,6 +3,8 @@ import { ChangeEvent, useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { DateTime } from "luxon";
 import "react-calendar/dist/Calendar.css";
+import DeletePuppyModal from "../components/deletePuppyModal";
+import router from "next/router";
 
 interface IUser {
   _id: string;
@@ -18,6 +20,8 @@ const SettingsPage = () => {
     email: "",
     puppy: { name: "", birthDate: new Date().toString() },
   });
+  const [showModal, setShowModal] = useState(false);
+
   let dt = DateTime.now();
 
   useEffect(() => {
@@ -49,7 +53,26 @@ const SettingsPage = () => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     let editResponse = await axios.put("http://localhost:3001/edit-user", user);
-    console.log(editResponse);
+  };
+
+  const toggleDeleteModal = async () => {
+    setShowModal(true);
+  };
+
+  const deletePuppy = async (confirmed: boolean) => {
+    if (confirmed === false) {
+    }
+    let deletePuppyResponse = await axios.put(
+      "http://localhost:3001/delete-puppy",
+      user,
+      {
+        withCredentials: true,
+      }
+    );
+    if (deletePuppyResponse.data) {
+      setShowModal(false);
+      return router.push("/add-new-puppy");
+    }
   };
 
   if (!user) {
@@ -98,6 +121,10 @@ const SettingsPage = () => {
         }}
       />
       <button onClick={handleClick}>Spara</button>
+      <button onClick={toggleDeleteModal}>Radera valp</button>
+      {showModal ? (
+        <DeletePuppyModal deletePuppy={deletePuppy}></DeletePuppyModal>
+      ) : null}
     </>
   );
 };

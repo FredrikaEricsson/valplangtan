@@ -53,7 +53,7 @@ const PuppyPage = () => {
   return (
     <>
       <div>Din valp {puppy.name}</div>
-      <div>är {puppy.ageInWeeks} vecka gammal</div>
+      <div>är inne i vecka {puppy.ageInWeeks} </div>
       <div>{update?.content}</div>
     </>
   );
