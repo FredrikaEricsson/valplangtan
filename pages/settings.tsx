@@ -10,6 +10,13 @@ interface IUser {
   _id: string;
   userName: string;
   email: string;
+  puppy: { name: string; birthDate: DateTime };
+}
+
+interface IUserResponse {
+  id: string;
+  userName: string;
+  email: string;
   puppy: { name: string; birthDate: string };
 }
 
@@ -18,7 +25,7 @@ const SettingsPage = () => {
     _id: "",
     userName: "",
     email: "",
-    puppy: { name: "", birthDate: new Date().toString() },
+    puppy: { name: "", birthDate: DateTime.now() },
   });
   const [showModal, setShowModal] = useState(false);
 
@@ -32,17 +39,29 @@ const SettingsPage = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      let userResponse = await axios.get("http://localhost:3001/get-user", {
-        withCredentials: true,
-      });
+      let userResponse = await axios.get<IUserResponse>(
+        "http://localhost:3001/get-user",
+        {
+          withCredentials: true,
+        }
+      );
 
-      setUser(userResponse.data);
+      setUser({
+        _id: userResponse.data.id,
+        userName: userResponse.data.userName,
+        email: userResponse.data.email,
+        puppy: {
+          name: userResponse.data.puppy.name,
+          birthDate: DateTime.fromISO(userResponse.data.puppy.birthDate),
+        },
+      });
     };
     getUser();
   }, []);
 
-  const handleDateChange = (date: string) => {
-    setUser({ ...user, puppy: { ...user.puppy, birthDate: date } });
+  const handleDateChange = (date: Date) => {
+    let birthDate = DateTime.fromJSDate(date);
+    setUser({ ...user, puppy: { ...user.puppy, birthDate: birthDate } });
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -174,9 +193,9 @@ const SettingsPage = () => {
         minDate={dt.minus({ years: 1 }).toJSDate()}
         maxDate={dt.toJSDate()}
         showWeekNumbers={true}
-        value={new Date(user.puppy.birthDate)}
+        value={user.puppy.birthDate.toJSDate()}
         onChange={(date: Date) => {
-          handleDateChange(date.toString());
+          handleDateChange(date);
         }}
       />
       <button

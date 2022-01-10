@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 
 interface ITask {
   _id: string;
-  week: string;
+  week: number;
   isDone: boolean;
   title: string;
   slides: [
@@ -15,7 +15,7 @@ interface ITask {
 
 interface ITaskProps {
   _id: string;
-  week: string;
+  week: number;
   isDone: boolean;
   title: string;
   slides: [

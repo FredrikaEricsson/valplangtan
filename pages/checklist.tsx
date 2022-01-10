@@ -4,7 +4,7 @@ import TaskList from "../components/taskList";
 
 interface ITask {
   _id: string;
-  week: string;
+  week: number;
   isDone: boolean;
   title: string;
   slides: [{ _id: string; description: string }];
@@ -16,19 +16,19 @@ interface ITaskResponse {
 }
 
 const ChecklistPage = () => {
-  const [puppyAge, setPuppyAge] = useState<string>();
+  const [puppyAge, setPuppyAge] = useState<number>();
   const [tasks, setTasks] = useState<ITask[]>();
 
   useEffect(() => {
     const getPuppyAge = async () => {
-      let puppyAgeResponse = await axios.get<string>(
+      let puppyAgeResponse = await axios.get<number>(
         "http://localhost:3001/get-puppy-age",
         {
           withCredentials: true,
         }
       );
 
-      setPuppyAge(puppyAgeResponse.data);
+      setPuppyAge(puppyAgeResponse.data + 1);
     };
     getPuppyAge();
   }, []);

@@ -1,9 +1,12 @@
-import Header from "./header";
+import { HeadingWrapper } from "../styles/global";
+import Navbar from "./navbar";
 
 const Layout = ({ children }: any) => {
   return (
     <>
-      <Header></Header>
+      <HeadingWrapper>
+        <Navbar></Navbar>
+      </HeadingWrapper>
       <main>{children}</main>
     </>
   );

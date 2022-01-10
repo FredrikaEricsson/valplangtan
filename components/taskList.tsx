@@ -1,10 +1,10 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import SlidesList from "./slidesList";
+
 import TaskItem from "./taskItem";
 
 interface ITask {
   _id: string;
-  week: string;
+  week: number;
   isDone: boolean;
   title: string;
   slides: [
@@ -17,7 +17,7 @@ interface ITask {
 
 interface ITaskListProps {
   tasks: ITask[];
-  puppyAge: string;
+  puppyAge: number;
   changeTaskStatus(editedTask: { id: string; isDone: boolean }): void;
 }
 
