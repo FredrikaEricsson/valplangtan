@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 const RegisterPage = () => {
   const [input, setInput] = useState({
@@ -8,7 +9,7 @@ const RegisterPage = () => {
     password: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState({
+  const [inputError, setInputError] = useState({
     username: "",
     email: "",
     password: "",
@@ -62,7 +63,7 @@ const RegisterPage = () => {
     } else {
       errorMessages.password = "";
     }
-    setErrorMessage(errorMessages);
+    setInputError(errorMessages);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -97,25 +98,31 @@ const RegisterPage = () => {
       <form action=''>
         <label htmlFor='username'>Användarnamn</label>
         <input type='text' name='username' onChange={handleChange} />
-        {errorMessage.username && <small>{errorMessage.username}</small>}
+        {inputError.username && <small>{inputError.username}</small>}
         <label htmlFor='email'>Email</label>
         <input type='email' name='email' onChange={handleChange} />
-        {errorMessage.email && <small>{errorMessage.email}</small>}
+        {inputError.email && <small>{inputError.email}</small>}
         <label htmlFor='password'>Lösenord</label>
         <input type='password' name='password' onChange={handleChange} />
-        {errorMessage.password && <small>{errorMessage.password}</small>}
+        {inputError.password && <small>{inputError.password}</small>}
         <button
           type='submit'
           onClick={handleClick}
           disabled={
-            errorMessage.username.length > 0 ||
-            errorMessage.email.length > 0 ||
-            errorMessage.password.length > 0
+            inputError.username.length > 0 ||
+            inputError.email.length > 0 ||
+            inputError.password.length > 0
           }
         >
           Registrera
         </button>
       </form>
+      <Link href='/login'>
+        <a>Logga in</a>
+      </Link>
+      <Link href='/forgot-password'>
+        <a>Glömt lösenord?</a>
+      </Link>
     </>
   );
 };

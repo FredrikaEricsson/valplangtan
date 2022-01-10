@@ -1,4 +1,5 @@
 import axios from "axios";
+import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 
 interface IEmail {
@@ -15,7 +16,7 @@ const ForgotPasswordPage = () => {
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(email);
+
     const forgotPasswordResponse = await axios.post(
       "http://localhost:3001/forgot-password",
       email
@@ -25,8 +26,17 @@ const ForgotPasswordPage = () => {
 
   return (
     <>
-      <input onChange={handleChange}></input>
+      <h1>Glömt lösenord</h1>
+      <p>Ange den mailadress som användes vid registering</p>
+      <label htmlFor='email'>Email</label>
+      <input type='email' name='email' onChange={handleChange}></input>
       <button onClick={handleClick}></button>
+      <Link href='/login'>
+        <a>Logga in</a>
+      </Link>
+      <Link href='/register'>
+        <a>Registrera</a>
+      </Link>
     </>
   );
 };
