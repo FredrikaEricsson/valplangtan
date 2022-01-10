@@ -93,11 +93,15 @@ const RegisterPage = () => {
 
   return (
     <>
+      <h1>Registrera</h1>
       <form action=''>
+        <label htmlFor='username'>Användarnamn</label>
         <input type='text' name='username' onChange={handleChange} />
         {errorMessage.username && <small>{errorMessage.username}</small>}
+        <label htmlFor='email'>Email</label>
         <input type='email' name='email' onChange={handleChange} />
         {errorMessage.email && <small>{errorMessage.email}</small>}
+        <label htmlFor='password'>Lösenord</label>
         <input type='password' name='password' onChange={handleChange} />
         {errorMessage.password && <small>{errorMessage.password}</small>}
         <button

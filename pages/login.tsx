@@ -11,6 +11,8 @@ const LoginPage = () => {
     password: "",
   });
 
+  const [errorMessage, setErrorMessage] = useState<any>();
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
     const value = target.value;
@@ -26,13 +28,18 @@ const LoginPage = () => {
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    let response = await axios.post("http://localhost:3001/login", input, {
-      withCredentials: true,
-    });
-    if (response.status === 200) {
-      return router.push("/add-new-puppy");
-    } else {
-      console.log("Det fungerar inte");
+    try {
+      let response = await axios.post("http://localhost:3001/login", input, {
+        withCredentials: true,
+      });
+
+      if (response.data.puppy.name === "") {
+        return router.push("/add-new-puppy");
+      } else {
+        return router.push("/puppy");
+      }
+    } catch (error) {
+      setErrorMessage("Fel email eller lösenord");
     }
   };
 
@@ -45,6 +52,7 @@ const LoginPage = () => {
           Logga in
         </button>
       </form>
+      {errorMessage ? <div>{errorMessage}</div> : null}
       <Link href='/register'>
         <a>Registera</a>
       </Link>

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import TaskList from "../components/taskList";
-import SlidesList from "../components/slidesList";
 
 interface ITask {
   _id: string;

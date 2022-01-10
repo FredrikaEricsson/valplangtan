@@ -12,14 +12,23 @@ const ConfirmationPage = () => {
   });
 
   useEffect(() => {
-    if (!id) {
-      return;
-    }
-    axios
-      .put<string>(`http://localhost:3001/confirm-user/${id}`)
-      .then((res) => {
-        setConfirmUserResponse({ loading: true, message: res.data });
-      });
+    const confirmUser = async () => {
+      try {
+        if (!id) {
+          return;
+        }
+        let confirmUserResponse = await axios.put<string>(
+          `http://localhost:3001/confirm-user/${id}`
+        );
+        setConfirmUserResponse({
+          loading: true,
+          message: confirmUserResponse.data,
+        });
+      } catch (error) {
+        setConfirmUserResponse({ loading: true, message: "Nånting gick fel" });
+      }
+    };
+    confirmUser();
   }, [id]);
 
   return (
