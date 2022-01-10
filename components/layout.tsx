@@ -7,6 +7,7 @@ const Layout = ({ children }: any) => {
       <HeadingWrapper>
         <Navbar></Navbar>
       </HeadingWrapper>
+
       <main>{children}</main>
     </>
   );
