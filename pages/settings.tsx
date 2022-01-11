@@ -21,12 +21,7 @@ interface IUserResponse {
 }
 
 const SettingsPage = () => {
-  const [user, setUser] = useState<IUser>({
-    _id: "",
-    userName: "",
-    email: "",
-    puppy: { name: "", birthDate: DateTime.now() },
-  });
+  const [user, setUser] = useState<IUser>();
   const [showModal, setShowModal] = useState(false);
 
   const [inputError, setInputError] = useState({
@@ -39,32 +34,42 @@ const SettingsPage = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      let userResponse = await axios.get<IUserResponse>(
-        "http://localhost:3001/get-user",
-        {
-          withCredentials: true,
-        }
-      );
+      try {
+        let userResponse = await axios.get<IUserResponse>(
+          "http://localhost:3001/get-user",
+          {
+            withCredentials: true,
+          }
+        );
 
-      setUser({
-        _id: userResponse.data.id,
-        userName: userResponse.data.userName,
-        email: userResponse.data.email,
-        puppy: {
-          name: userResponse.data.puppy.name,
-          birthDate: DateTime.fromISO(userResponse.data.puppy.birthDate),
-        },
-      });
+        setUser({
+          _id: userResponse.data.id,
+          userName: userResponse.data.userName,
+          email: userResponse.data.email,
+          puppy: {
+            name: userResponse.data.puppy.name,
+            birthDate: DateTime.fromISO(userResponse.data.puppy.birthDate),
+          },
+        });
+      } catch (error) {
+        return router.push("/login");
+      }
     };
     getUser();
   }, []);
 
   const handleDateChange = (date: Date) => {
+    if (!user) {
+      return;
+    }
     let birthDate = DateTime.fromJSDate(date);
     setUser({ ...user, puppy: { ...user.puppy, birthDate: birthDate } });
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!user) {
+      return;
+    }
     const name = e.target.name;
     const value = e.target.value;
     if (name === "userName" || "email") {
@@ -87,6 +92,9 @@ const SettingsPage = () => {
   }, [user]);
 
   const validation = () => {
+    if (!user) {
+      return;
+    }
     let errorMessages = {
       username: "",
       email: "",

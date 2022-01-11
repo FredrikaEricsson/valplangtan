@@ -27,21 +27,25 @@ const PuppyPage = () => {
 
   useEffect(() => {
     const getPuppy = async () => {
-      let puppyResponse = await axios.get<IPuppyResponse>(
-        "http://localhost:3001/get-puppy",
-        {
-          withCredentials: true,
-        }
-      );
+      try {
+        let puppyResponse = await axios.get<IPuppyResponse>(
+          "http://localhost:3001/get-puppy",
+          {
+            withCredentials: true,
+          }
+        );
 
-      setPuppy({
-        birthDate: puppyResponse.data.birthDate,
-        ageInWeeks: puppyResponse.data.ageInWeeks,
-        name: puppyResponse.data.name,
-      });
-      setUpdate({
-        content: puppyResponse.data.updateByWeek,
-      });
+        setPuppy({
+          birthDate: puppyResponse.data.birthDate,
+          ageInWeeks: puppyResponse.data.ageInWeeks,
+          name: puppyResponse.data.name,
+        });
+        setUpdate({
+          content: puppyResponse.data.updateByWeek,
+        });
+      } catch (error) {
+        return router.push("/login");
+      }
     };
     getPuppy();
   }, [router]);

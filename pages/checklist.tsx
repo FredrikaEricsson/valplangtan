@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import TaskList from "../components/taskList";
+import router from "next/router";
 
 interface ITask {
   _id: string;
@@ -21,28 +22,36 @@ const ChecklistPage = () => {
 
   useEffect(() => {
     const getPuppyAge = async () => {
-      let puppyAgeResponse = await axios.get<number>(
-        "http://localhost:3001/get-puppy-age",
-        {
-          withCredentials: true,
-        }
-      );
+      try {
+        let puppyAgeResponse = await axios.get<number>(
+          "http://localhost:3001/get-puppy-age",
+          {
+            withCredentials: true,
+          }
+        );
 
-      setPuppyAge(puppyAgeResponse.data + 1);
+        setPuppyAge(puppyAgeResponse.data + 1);
+      } catch (error) {
+        return router.push("/login");
+      }
     };
     getPuppyAge();
   }, []);
 
   useEffect(() => {
     const getTasks = async () => {
-      let checklistResponse = await axios.get<ITask[]>(
-        "http://localhost:3001/get-tasks",
-        {
-          withCredentials: true,
-        }
-      );
+      try {
+        let checklistResponse = await axios.get<ITask[]>(
+          "http://localhost:3001/get-tasks",
+          {
+            withCredentials: true,
+          }
+        );
 
-      setTasks(checklistResponse.data);
+        setTasks(checklistResponse.data);
+      } catch (error) {
+        return router.push("/login");
+      }
     };
     getTasks();
   }, [puppyAge]);

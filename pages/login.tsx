@@ -78,8 +78,15 @@ const LoginPage = () => {
       } else {
         return router.push("/puppy");
       }
-    } catch (error) {
-      setErrorMessage("Fel email eller lösenord");
+    } catch (error: any) {
+      if (error.response.status === 403) {
+        return setErrorMessage("Användaren är inte verifierad");
+      }
+      if (error.response.status === 401) {
+        return setErrorMessage("Fel email eller lösenord");
+      } else {
+        return setErrorMessage("Nånting gick fel");
+      }
     }
   };
 
