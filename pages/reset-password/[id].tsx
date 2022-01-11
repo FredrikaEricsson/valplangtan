@@ -11,7 +11,7 @@ const ResetPage = () => {
   const router = useRouter();
   let id = router.query.id as string;
 
-  const [resetPasswordMessage, setResetPasswordMessage] = useState();
+  const [resetPasswordMessage, setResetPasswordMessage] = useState<string>();
 
   const [updatedUser, setUpdatedUser] = useState<IUpdatedUser>();
 
@@ -28,11 +28,15 @@ const ResetPage = () => {
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const resetPasswordResponse = await axios.put(
-      "http://localhost:3001/reset-password",
-      updatedUser
-    );
-    setResetPasswordMessage(resetPasswordResponse.data);
+    try {
+      const resetPasswordResponse = await axios.put(
+        "http://localhost:3001/reset-password",
+        updatedUser
+      );
+      setResetPasswordMessage(resetPasswordResponse.data);
+    } catch (error) {
+      setResetPasswordMessage("Nånting gick fel. Försök igen senare");
+    }
   };
 
   return (

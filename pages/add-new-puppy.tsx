@@ -40,14 +40,22 @@ const AddNewPuppy = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      let userResponse = await axios.get("http://localhost:3001/get-user", {
-        withCredentials: true,
-      });
+      try {
+        let userResponse = await axios.get("http://localhost:3001/get-user", {
+          withCredentials: true,
+        });
 
-      if (userResponse.data.puppy.name === "") {
-        return;
-      } else {
-        return router.push("/puppy");
+        if (userResponse.data.puppy.name === "") {
+          return;
+        } else {
+          return router.push("/puppy");
+        }
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          return router.push("/login");
+        } else {
+          return router.push("/error");
+        }
       }
     };
     getUser();
@@ -89,17 +97,21 @@ const AddNewPuppy = () => {
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    let response = await axios.post(
-      "http://localhost:3001/add-new-puppy",
-      puppy,
-      {
-        withCredentials: true,
-      }
-    );
-    if (response.status === 200) {
+    try {
+      let response = await axios.post(
+        "http://localhost:3001/add-new-puppy",
+        puppy,
+        {
+          withCredentials: true,
+        }
+      );
       return router.push("/puppy");
-    } else {
-      console.log("Det funkar inte");
+    } catch (error: any) {
+      if (error.response.status === 401) {
+        return router.push("/login");
+      } else {
+        return router.push("/error");
+      }
     }
   };
 

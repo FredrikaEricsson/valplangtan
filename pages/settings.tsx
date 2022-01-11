@@ -51,8 +51,12 @@ const SettingsPage = () => {
             birthDate: DateTime.fromISO(userResponse.data.puppy.birthDate),
           },
         });
-      } catch (error) {
-        return router.push("/login");
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          return router.push("/login");
+        } else {
+          return router.push("/error");
+        }
       }
     };
     getUser();
@@ -131,7 +135,12 @@ const SettingsPage = () => {
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    let editResponse = await axios.put("http://localhost:3001/edit-user", user);
+    try {
+      let editResponse = await axios.put(
+        "http://localhost:3001/edit-user",
+        user
+      );
+    } catch (error) {}
   };
 
   const toggleDeleteModal = async () => {

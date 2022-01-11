@@ -79,6 +79,7 @@ const LoginPage = () => {
         return router.push("/puppy");
       }
     } catch (error: any) {
+      console.log(error);
       if (error.response.status === 403) {
         return setErrorMessage("Användaren är inte verifierad");
       }

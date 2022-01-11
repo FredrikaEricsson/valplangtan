@@ -43,8 +43,12 @@ const PuppyPage = () => {
         setUpdate({
           content: puppyResponse.data.updateByWeek,
         });
-      } catch (error) {
-        return router.push("/login");
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          return router.push("/login");
+        } else {
+          return router.push("/error");
+        }
       }
     };
     getPuppy();

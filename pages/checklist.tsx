@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import TaskList from "../components/taskList";
-import router from "next/router";
+import router, { useRouter } from "next/router";
 
 interface ITask {
   _id: string;
@@ -31,8 +31,12 @@ const ChecklistPage = () => {
         );
 
         setPuppyAge(puppyAgeResponse.data + 1);
-      } catch (error) {
-        return router.push("/login");
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          return router.push("/login");
+        } else {
+          return router.push("/error");
+        }
       }
     };
     getPuppyAge();
@@ -49,23 +53,36 @@ const ChecklistPage = () => {
         );
 
         setTasks(checklistResponse.data);
-      } catch (error) {
-        return router.push("/login");
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          return router.push("/login");
+        } else {
+          return router.push("/error");
+        }
       }
     };
     getTasks();
   }, [puppyAge]);
 
-  useEffect(() => {
-    const onbeforeunloadFn = async () => {
-      await axios.put<ITask[]>("http://localhost:3001/edit-many-tasks", tasks);
-    };
-
-    window.addEventListener("beforeunload", onbeforeunloadFn);
-    return () => {
-      window.removeEventListener("beforeunload", onbeforeunloadFn);
-    };
+  const sendTasks = useCallback(async () => {
+    await axios.put<ITask[]>("http://localhost:3001/edit-many-tasks", tasks, {
+      withCredentials: true,
+    });
   }, [tasks]);
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", sendTasks);
+    return () => {
+      window.removeEventListener("beforeunload", sendTasks);
+    };
+  }, [sendTasks]);
+
+  useEffect(() => {
+    router.events.on("routeChangeStart", sendTasks);
+    return () => {
+      router.events.off("routeChangeStart", sendTasks);
+    };
+  }, [sendTasks]);
 
   const changeTaskStatus = async (editedTask: ITaskResponse) => {
     let taskToBeUpdated = tasks?.find((task) => {

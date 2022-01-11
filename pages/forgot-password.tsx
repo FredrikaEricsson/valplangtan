@@ -8,6 +8,7 @@ interface IEmail {
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState<IEmail>();
+  const [resetMessage, setResetMessage] = useState<string>();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
@@ -16,12 +17,21 @@ const ForgotPasswordPage = () => {
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
-    const forgotPasswordResponse = await axios.post(
-      "http://localhost:3001/forgot-password",
-      email
-    );
-    console.log(forgotPasswordResponse);
+    try {
+      const forgotPasswordResponse = await axios.post(
+        "http://localhost:3001/forgot-password",
+        email
+      );
+      setResetMessage(
+        "Ett mail med en återställningslänk har skickats till dig"
+      );
+    } catch (error: any) {
+      if (error.response.status === 401) {
+        setResetMessage("Emailen du angav är inte registrerad hos oss");
+      } else {
+        setResetMessage("Nånting gick fel. Försök igen senare");
+      }
+    }
   };
 
   return (

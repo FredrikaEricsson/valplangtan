@@ -15,6 +15,8 @@ const RegisterPage = () => {
     password: "",
   });
 
+  const [confirmationMessage, setConfirmationMessage] = useState<string>();
+
   const firstUpdate = useRef(true);
 
   useEffect(() => {
@@ -81,14 +83,13 @@ const RegisterPage = () => {
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    let response = await axios.post(
-      "http://localhost:3001/register-user",
-      input
-    );
-    if (response.status === 200) {
-      console.log("Registerring klar");
-    } else {
-      console.log("Det fungerar inte");
+    try {
+      await axios.post("http://localhost:3001/register-user", input);
+      setConfirmationMessage(
+        "Registrering klar! Ett mail med en bekräftelselänk har skickats till dig!"
+      );
+    } catch (error: any) {
+      setConfirmationMessage("Nånting gick fel! Försök igen senare!");
     }
   };
 

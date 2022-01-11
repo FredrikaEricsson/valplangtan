@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 interface ITask {
   _id: string;
@@ -43,11 +43,7 @@ const TaskItem = (props: ITaskProps) => {
   };
 
   useEffect(() => {
-    const editedTask = {
-      id: props._id,
-      isDone: isDone,
-    };
-    props.changeTaskStatus(editedTask);
+    props.changeTaskStatus({ id: props._id, isDone: isDone });
   }, [isDone, props]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
