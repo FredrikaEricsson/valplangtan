@@ -2,9 +2,10 @@ import axios from "axios";
 import Link from "next/link";
 import router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Header } from "../styles/global";
+import { Hamburger, Header, Logo, MenuLink } from "../styles/global";
 const Navbar = () => {
   const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>();
+  const [isOpen, setIsOpen] = useState(false);
 
   const getRouter = useRouter();
   const routerPath = getRouter.pathname;
@@ -35,25 +36,33 @@ const Navbar = () => {
 
   return (
     <>
-      <Header>
+      <Link href='/' passHref>
+        <Logo>Valplängtan</Logo>
+      </Link>
+      <Hamburger onClick={() => setIsOpen(!isOpen)}>
+        <span />
+        <span />
+        <span />
+      </Hamburger>
+      <Header isOpen={isOpen}>
         {userIsLoggedIn ? (
           <>
-            <Link href='/puppy'>
-              <a>Min valp</a>
+            <Link href='/puppy' passHref>
+              <MenuLink>Min valp</MenuLink>
             </Link>
-            <Link href='/checklist'>
-              <a>Checklista</a>
+            <Link href='/checklist' passHref>
+              <MenuLink>Checklista</MenuLink>
             </Link>
-            <Link href='/settings'>
-              <a>Inställningar</a>
+            <Link href='/settings' passHref>
+              <MenuLink>Inställningar</MenuLink>
             </Link>
-            <Link href='/'>
-              <a onClick={handleClick}>Logga ut</a>
+            <Link href='/' passHref>
+              <MenuLink onClick={handleClick}>Logga ut</MenuLink>
             </Link>
           </>
         ) : (
-          <Link href='/login'>
-            <a>Logga in</a>
+          <Link href='/login' passHref>
+            <MenuLink>Logga in</MenuLink>
           </Link>
         )}
       </Header>

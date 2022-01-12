@@ -2,7 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { DateTime } from "luxon";
-
+import {
+  HeaderWrapper,
+  ImageWrapper,
+  PuppyPageWrapper,
+  UpdateWrapper,
+} from "../styles/puppy";
+import Image from "next/image";
+import puppyImage from "../public/puppy.png";
 interface IPuppy {
   birthDate: string;
   ageInWeeks: number;
@@ -60,9 +67,19 @@ const PuppyPage = () => {
 
   return (
     <>
-      <div>Din valp {puppy.name}</div>
-      <div>är inne i vecka {puppy.ageInWeeks} </div>
-      <div>{update?.content}</div>
+      <PuppyPageWrapper>
+        <HeaderWrapper>
+          <h1>
+            Din valp {puppy.name} är inne i vecka {puppy.ageInWeeks}{" "}
+          </h1>
+        </HeaderWrapper>
+        <ImageWrapper>
+          <Image src={puppyImage} alt='puppy'></Image>
+        </ImageWrapper>
+        <UpdateWrapper>
+          <p>{update?.content}</p>
+        </UpdateWrapper>
+      </PuppyPageWrapper>
     </>
   );
 };

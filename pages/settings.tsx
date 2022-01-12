@@ -23,6 +23,7 @@ interface IUserResponse {
 const SettingsPage = () => {
   const [user, setUser] = useState<IUser>();
   const [showModal, setShowModal] = useState(false);
+  const [message, setMessage] = useState<string>();
 
   const [inputError, setInputError] = useState({
     username: "",
@@ -136,11 +137,18 @@ const SettingsPage = () => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      let editResponse = await axios.put(
-        "http://localhost:3001/edit-user",
-        user
-      );
-    } catch (error) {}
+      await axios.put("http://localhost:3001/edit-user", user, {
+        withCredentials: true,
+      });
+
+      setMessage("Dina ändringar är sparade");
+    } catch (error: any) {
+      if (error.response.status === 401) {
+        return router.push("/login");
+      } else {
+        setMessage("Nånting gick fel. Försök igen senare");
+      }
+    }
   };
 
   const toggleDeleteModal = async () => {
@@ -225,6 +233,7 @@ const SettingsPage = () => {
       >
         Spara
       </button>
+      {message && <small>{message}</small>}
       <button onClick={toggleDeleteModal}>Radera valp</button>
       {showModal ? (
         <DeletePuppyModal deletePuppy={deletePuppy}></DeletePuppyModal>

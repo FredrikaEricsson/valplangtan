@@ -1,4 +1,4 @@
-import { HeadingWrapper } from "../styles/global";
+import { HeadingWrapper, MainContainer } from "../styles/global";
 import Navbar from "./navbar";
 
 const Layout = ({ children }: any) => {
@@ -8,7 +8,7 @@ const Layout = ({ children }: any) => {
         <Navbar></Navbar>
       </HeadingWrapper>
 
-      <main>{children}</main>
+      <MainContainer>{children}</MainContainer>
     </>
   );
 };
