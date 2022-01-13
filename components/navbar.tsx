@@ -16,8 +16,10 @@ const Navbar = () => {
           withCredentials: true,
         });
         setUserIsLoggedIn(true);
+        setIsOpen(false);
       } catch (error) {
         setUserIsLoggedIn(false);
+        setIsOpen(false);
       }
     };
     getUser();

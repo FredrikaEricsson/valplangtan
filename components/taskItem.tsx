@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-
+import Slide from "./slide";
+import { SlideContainer } from "../styles/checkList";
 interface ITask {
   _id: string;
   week: number;
@@ -33,9 +34,7 @@ interface ISlide {
 
 const TaskItem = (props: ITaskProps) => {
   const [showSlides, setShowSlides] = useState<boolean>(false);
-  const [index, setIndex] = useState<number>(0);
-  const [showNextArrow, setShowNextArrow] = useState(true);
-  const [showPrevArrow, setShowPrevArrow] = useState(false);
+
   const [isDone, setIsDone] = useState(props.isDone);
 
   const toggleSlides = () => {
@@ -48,25 +47,6 @@ const TaskItem = (props: ITaskProps) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsDone(!isDone);
-  };
-
-  const nextSlide = () => {
-    setIndex(index + 1);
-    if (index > 0) {
-      setShowNextArrow(false);
-    } else {
-      setShowPrevArrow(true);
-    }
-  };
-
-  const prevSlide = () => {
-    setIndex(index - 1);
-
-    if (index === 1) {
-      setShowPrevArrow(false);
-    } else {
-      setShowNextArrow(true);
-    }
   };
 
   return (
@@ -82,12 +62,9 @@ const TaskItem = (props: ITaskProps) => {
           <span onClick={toggleSlides}>{props.title}</span>
         </div>
         {showSlides ? (
-          <div>
-            <div>{props.slides[index].description}</div>
-
-            {showNextArrow ? <div onClick={nextSlide}>Nästa</div> : null}
-            {showPrevArrow ? <div onClick={prevSlide}>Förra</div> : null}
-          </div>
+          <SlideContainer>
+            <Slide slides={props.slides} toggleSlides={toggleSlides}></Slide>
+          </SlideContainer>
         ) : null}
       </div>
     </>
