@@ -2,7 +2,8 @@ import axios from "axios";
 import Link from "next/link";
 import router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Hamburger, Header, Logo, MenuLink } from "../styles/global";
+import { Hamburger, Header, Logo, MenuLink, Headline } from "../styles/global";
+
 const Navbar = () => {
   const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>();
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +40,9 @@ const Navbar = () => {
   return (
     <>
       <Link href='/' passHref>
-        <Logo>Valplängtan</Logo>
+        <Logo>
+          <Headline>Valplängtan</Headline>
+        </Logo>
       </Link>
       <Hamburger onClick={() => setIsOpen(!isOpen)}>
         <span />

@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Open Sans', serif;
+    font-family: 'Source sans pro', serif;
   }
   body {
     overflow-x:hidden;
@@ -52,7 +52,7 @@ export const Header = styled.div`
 
 export const Logo = styled.a`
   padding: 1rem 0;
-  color: ${colors.colorBrown};
+  color: ${colors.colorDarkGrey};
   text-decoration: none;
   font-weight: 800;
   font-size: 1.7rem;
@@ -88,4 +88,10 @@ export const MenuLink = styled.a`
   &:hover {
     color: ${colors.colorBrown};
   }
+`;
+
+export const Headline = styled.h1`
+  font-family: "Patrick Hand", "Open sans";
+  font-size: 1.7rem;
+  letter-spacing: 0.2rem;
 `;

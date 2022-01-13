@@ -5,6 +5,7 @@ import { DateTime } from "luxon";
 import "react-calendar/dist/Calendar.css";
 import DeletePuppyModal from "../components/deletePuppyModal";
 import router from "next/router";
+import { Headline } from "../styles/global";
 
 interface IUser {
   _id: string;
@@ -177,7 +178,7 @@ const SettingsPage = () => {
 
   return (
     <>
-      <h1>Inställningar</h1>
+      <Headline>Inställningar</Headline>
       <label htmlFor='userName'>Användarnamn</label>
       <input
         type='text'

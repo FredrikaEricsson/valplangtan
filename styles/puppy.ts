@@ -9,7 +9,7 @@ export const PuppyPageWrapper = styled.div`
 export const HeaderWrapper = styled.div`
   display: flex;
   text-align: center;
-  margin-top: 10%;
+  margin-top: 5%%;
   padding: 5%;
 `;
 

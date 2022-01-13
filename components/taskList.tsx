@@ -3,6 +3,7 @@ import {
   CurrentTaskListContainer,
   PrevTaskListContainer,
 } from "../styles/checkList";
+import { Headline } from "../styles/global";
 
 import TaskItem from "./taskItem";
 
@@ -50,7 +51,7 @@ const TaskList = (props: ITaskListProps) => {
   return (
     <>
       <CurrentTaskListContainer>
-        <h1>Veckans checklista</h1>
+        <Headline>Veckans checklista</Headline>
         <div>
           {currentTasks.map((currentTask) => {
             return (
@@ -69,7 +70,7 @@ const TaskList = (props: ITaskListProps) => {
         </div>
       </CurrentTaskListContainer>
       <PrevTaskListContainer>
-        <h1>Föregående veckor</h1>
+        <Headline>Föregående veckor</Headline>
         <div>
           {previousTasks.map((previousTask) => {
             return (

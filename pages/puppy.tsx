@@ -8,6 +8,7 @@ import {
   PuppyPageWrapper,
   UpdateWrapper,
 } from "../styles/puppy";
+import { Headline } from "../styles/global";
 import Image from "next/image";
 import puppyImage from "../public/puppy.png";
 interface IPuppy {
@@ -69,9 +70,9 @@ const PuppyPage = () => {
     <>
       <PuppyPageWrapper>
         <HeaderWrapper>
-          <h1>
+          <Headline>
             Din valp {puppy.name} är inne i vecka {puppy.ageInWeeks}
-          </h1>
+          </Headline>
         </HeaderWrapper>
         <ImageWrapper>
           <Image src={puppyImage} alt='puppy'></Image>
