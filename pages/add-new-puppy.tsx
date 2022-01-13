@@ -124,7 +124,7 @@ const AddNewPuppy = () => {
         {error.puppyName && <small>{error.puppyName}</small>}
         <label htmlFor='Calendar'>Valpens födelsedatum</label>
         <Calendar
-          minDate={dt.minus({ years: 1 }).toJSDate()}
+          minDate={dt.minus({ weeks: 7, days: 6 }).toJSDate()}
           maxDate={dt.toJSDate()}
           showWeekNumbers={true}
           value={new Date()}

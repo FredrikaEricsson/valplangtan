@@ -1,6 +1,10 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Slide from "./slide";
-import { SlideContainer } from "../styles/checkList";
+import {
+  CheckboxContainer,
+  SlideContainer,
+  TaskItemContainer,
+} from "../styles/checkList";
 interface ITask {
   _id: string;
   week: number;
@@ -52,15 +56,19 @@ const TaskItem = (props: ITaskProps) => {
   return (
     <>
       <div key={props._id}>
-        <input
-          type='checkbox'
-          id={props._id}
-          checked={isDone}
-          onChange={handleChange}
-        ></input>
-        <div>
-          <span onClick={toggleSlides}>{props.title}</span>
-        </div>
+        <TaskItemContainer>
+          <CheckboxContainer>
+            <input
+              type='checkbox'
+              id={props._id}
+              checked={isDone}
+              onChange={handleChange}
+            ></input>
+          </CheckboxContainer>
+          <div>
+            <span onClick={toggleSlides}>{props.title}</span>
+          </div>
+        </TaskItemContainer>
         {showSlides ? (
           <SlideContainer>
             <Slide slides={props.slides} toggleSlides={toggleSlides}></Slide>

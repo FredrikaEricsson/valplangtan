@@ -70,7 +70,7 @@ const PuppyPage = () => {
       <PuppyPageWrapper>
         <HeaderWrapper>
           <h1>
-            Din valp {puppy.name} är inne i vecka {puppy.ageInWeeks}{" "}
+            Din valp {puppy.name} är inne i vecka {puppy.ageInWeeks}
           </h1>
         </HeaderWrapper>
         <ImageWrapper>

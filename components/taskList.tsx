@@ -1,4 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import {
+  CurrentTaskListContainer,
+  PrevTaskListContainer,
+} from "../styles/checkList";
 
 import TaskItem from "./taskItem";
 
@@ -39,45 +43,50 @@ const TaskList = (props: ITaskListProps) => {
     let filteredPreviousTasks = props.tasks.filter((task) => {
       return task.week < props.puppyAge;
     });
+
     setPreviousTasks(filteredPreviousTasks);
   }, [props.puppyAge, props.tasks]);
 
   return (
     <>
-      <h1>Veckans checklista</h1>
-      <div>
-        {currentTasks.map((currentTask) => {
-          return (
-            <div key={currentTask._id}>
-              <TaskItem
-                _id={currentTask._id}
-                week={currentTask.week}
-                isDone={currentTask.isDone}
-                title={currentTask.title}
-                slides={currentTask.slides}
-                changeTaskStatus={props.changeTaskStatus}
-              ></TaskItem>
-            </div>
-          );
-        })}
-      </div>
-      <h1>Föregående veckor</h1>
-      <div>
-        {previousTasks.map((previousTask) => {
-          return (
-            <div key={previousTask._id}>
-              <TaskItem
-                _id={previousTask._id}
-                week={previousTask.week}
-                isDone={previousTask.isDone}
-                title={previousTask.title}
-                slides={previousTask.slides}
-                changeTaskStatus={props.changeTaskStatus}
-              ></TaskItem>
-            </div>
-          );
-        })}
-      </div>
+      <CurrentTaskListContainer>
+        <h1>Veckans checklista</h1>
+        <div>
+          {currentTasks.map((currentTask) => {
+            return (
+              <div key={currentTask._id}>
+                <TaskItem
+                  _id={currentTask._id}
+                  week={currentTask.week}
+                  isDone={currentTask.isDone}
+                  title={currentTask.title}
+                  slides={currentTask.slides}
+                  changeTaskStatus={props.changeTaskStatus}
+                ></TaskItem>
+              </div>
+            );
+          })}
+        </div>
+      </CurrentTaskListContainer>
+      <PrevTaskListContainer>
+        <h1>Föregående veckor</h1>
+        <div>
+          {previousTasks.map((previousTask) => {
+            return (
+              <div key={previousTask._id}>
+                <TaskItem
+                  _id={previousTask._id}
+                  week={previousTask.week}
+                  isDone={previousTask.isDone}
+                  title={previousTask.title}
+                  slides={previousTask.slides}
+                  changeTaskStatus={props.changeTaskStatus}
+                ></TaskItem>
+              </div>
+            );
+          })}
+        </div>
+      </PrevTaskListContainer>
     </>
   );
 };

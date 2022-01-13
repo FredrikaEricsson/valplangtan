@@ -215,7 +215,7 @@ const SettingsPage = () => {
       />
       {inputError.puppyName && <small>{inputError.puppyName}</small>}
       <Calendar
-        minDate={dt.minus({ years: 1 }).toJSDate()}
+        minDate={dt.minus({ weeks: 7, days: 6 }).toJSDate()}
         maxDate={dt.toJSDate()}
         showWeekNumbers={true}
         value={user.puppy.birthDate.toJSDate()}
