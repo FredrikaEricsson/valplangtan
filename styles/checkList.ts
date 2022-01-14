@@ -1,6 +1,9 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { colors } from "../assets/colors";
+import { slideInUp } from "react-animations";
+const slideAnimation = keyframes`${slideInUp}`;
 export const SlideContainer = styled.div`
+  animation: 0.3s ${slideAnimation};
   position: absolute;
   z-index: 1;
   background-color: ${colors.colorLightGrey};
