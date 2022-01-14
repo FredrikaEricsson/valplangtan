@@ -2,6 +2,14 @@ import styled, { keyframes } from "styled-components";
 import { colors } from "../assets/colors";
 import { slideInUp } from "react-animations";
 const slideAnimation = keyframes`${slideInUp}`;
+
+export const ChecklistContainer = styled.div`
+  background-color: ${colors.colorBeige};
+  padding: 5%;
+  border-radius: 4%;
+  margin-top: 10%;
+`;
+
 export const SlideContainer = styled.div`
   animation: 0.3s ${slideAnimation};
   position: absolute;
@@ -12,6 +20,8 @@ export const SlideContainer = styled.div`
   width: 90%;
   height: 50%;
   padding: 5%;
+  border-radius: 4%;
+  border: 2px solid ${colors.colorDarkGrey};
 `;
 
 export const TaskItemContainer = styled.div`

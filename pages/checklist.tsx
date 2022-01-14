@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import TaskList from "../components/taskList";
 import router, { useRouter } from "next/router";
+import { ChecklistContainer } from "../styles/checkList";
 
 interface ITask {
   _id: string;
@@ -34,6 +35,9 @@ const ChecklistPage = () => {
       } catch (error: any) {
         if (error.response.status === 401) {
           return router.push("/login");
+        }
+        if (error.response.status === 403) {
+          return router.push("/add-new-puppy");
         } else {
           return router.push("/error");
         }
@@ -96,13 +100,13 @@ const ChecklistPage = () => {
   return (
     <>
       {tasks && puppyAge ? (
-        <>
+        <ChecklistContainer>
           <TaskList
             tasks={tasks}
             puppyAge={puppyAge}
             changeTaskStatus={changeTaskStatus}
           ></TaskList>
-        </>
+        </ChecklistContainer>
       ) : null}
     </>
   );

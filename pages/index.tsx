@@ -1,8 +1,11 @@
+import { Headline } from "../styles/global";
+import { StartPageWrapper } from "../styles/startPage";
+
 const IndexPage = () => {
   return (
-    <>
-      <h1>Välkommen till valplängtan</h1>
-    </>
+    <StartPageWrapper>
+      <Headline>Välkommen till valplängtan</Headline>
+    </StartPageWrapper>
   );
 };
 

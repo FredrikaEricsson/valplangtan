@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { Headline, Input, Button } from "../styles/global";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -93,22 +94,22 @@ const LoginPage = () => {
 
   return (
     <>
-      <h1>Logga in</h1>
+      <Headline>Logga in</Headline>
       <form action=''>
         <label htmlFor='email'>Email</label>
-        <input type='email' name='email' onChange={handleChange} />
+        <Input type='email' name='email' onChange={handleChange} />
         {inputError.email && <small>{inputError.email}</small>}
         <label htmlFor='password'>Lösenord</label>
-        <input type='password' name='password' onChange={handleChange} />
+        <Input type='password' name='password' onChange={handleChange} />
         {inputError.password && <small>{inputError.password}</small>}
-        <button
+        <Button
           disabled={
             inputError.email.length > 0 || inputError.password.length > 0
           }
           onClick={handleClick}
         >
           Logga in
-        </button>
+        </Button>
       </form>
       {errorMessage ? <div>{errorMessage}</div> : null}
       <Link href='/register'>

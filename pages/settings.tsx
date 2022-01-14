@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 import "react-calendar/dist/Calendar.css";
 import DeletePuppyModal from "../components/deletePuppyModal";
 import router from "next/router";
-import { Headline } from "../styles/global";
+import { Headline, Input, Button } from "../styles/global";
 import {
   CalendarWrapper,
   InputWrapper,
@@ -49,7 +49,9 @@ const SettingsPage = () => {
             withCredentials: true,
           }
         );
-
+        if (userResponse.data.puppy.name === "") {
+          return router.push("/add-new-puppy");
+        }
         setUser({
           _id: userResponse.data.id,
           userName: userResponse.data.userName,
@@ -62,6 +64,9 @@ const SettingsPage = () => {
       } catch (error: any) {
         if (error.response.status === 401) {
           return router.push("/login");
+        }
+        if (error.response.status === 403) {
+          return router.push("/add-new-puppy");
         } else {
           return router.push("/error");
         }
@@ -133,11 +138,15 @@ const SettingsPage = () => {
       }
     }
     if (user.puppy.name === "") {
-      errorMessages.puppyName = "Valpens namn måste vara minst 1 tecken långt";
+      errorMessages.puppyName = "Valpen måste ha ett namn";
     } else {
-      errorMessages.puppyName = "";
+      if (user.puppy.name.length > 20 || user.puppy.name.length < 2) {
+        errorMessages.puppyName =
+          "Valpens namn måste vara mellan 2-20 tecken långt";
+      } else {
+        errorMessages.puppyName = "";
+      }
     }
-
     setInputError(errorMessages);
   };
 
@@ -188,7 +197,7 @@ const SettingsPage = () => {
       <SettingsWrapper>
         <InputWrapper>
           <label htmlFor='userName'>Användarnamn</label>
-          <input
+          <Input
             type='text'
             name='userName'
             required
@@ -202,7 +211,7 @@ const SettingsPage = () => {
         </InputWrapper>
         <InputWrapper>
           <label htmlFor='email'>Email</label>
-          <input
+          <Input
             type='email'
             name='email'
             required
@@ -216,7 +225,7 @@ const SettingsPage = () => {
         </InputWrapper>
         <InputWrapper>
           <label htmlFor='puppyName'>Valpens namn</label>
-          <input
+          <Input
             type='text'
             name='puppyName'
             required
@@ -242,7 +251,7 @@ const SettingsPage = () => {
             />
           </label>
         </CalendarWrapper>
-        <button
+        <Button
           disabled={
             inputError.username.length > 0 ||
             inputError.email.length > 0 ||
@@ -251,9 +260,9 @@ const SettingsPage = () => {
           onClick={handleClick}
         >
           Spara
-        </button>
+        </Button>
         {message && <small>{message}</small>}
-        <button onClick={toggleDeleteModal}>Radera valp</button>
+        <Button onClick={toggleDeleteModal}>Radera valp</Button>
         {showModal ? (
           <DeletePuppyModal deletePuppy={deletePuppy}></DeletePuppyModal>
         ) : null}

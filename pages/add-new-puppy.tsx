@@ -3,8 +3,9 @@ import { DateTime } from "luxon";
 import "react-calendar/dist/Calendar.css";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { Button, Input, Headline } from "../styles/global";
+import { AddPuppyContainer, InputWrapper } from "../styles/add-new-puppy";
 
 interface INewPuppy {
   birthDate: DateTime;
@@ -33,7 +34,12 @@ const AddNewPuppy = () => {
     if (puppy.name === "") {
       errorMessage.puppyName = "Valpen behöver ett namn";
     } else {
-      errorMessage.puppyName = "";
+      if (puppy.name.length > 20 || puppy.name.length < 2) {
+        errorMessage.puppyName =
+          "Valpens namn måste vara mellan 2-20 tecken långt";
+      } else {
+        errorMessage.puppyName = "";
+      }
     }
     setError(errorMessage);
   };
@@ -116,27 +122,32 @@ const AddNewPuppy = () => {
   };
 
   return (
-    <>
-      <h1>Ny valp</h1>
+    <AddPuppyContainer>
+      <Headline>Ny valp</Headline>
+
       <form action=''>
-        <label htmlFor='name'>Valpens namn</label>
-        <input type='text' name='name' onChange={handleChange} />
-        {error.puppyName && <small>{error.puppyName}</small>}
-        <label htmlFor='Calendar'>Valpens födelsedatum</label>
-        <Calendar
-          minDate={dt.minus({ weeks: 7, days: 6 }).toJSDate()}
-          maxDate={dt.toJSDate()}
-          showWeekNumbers={true}
-          value={new Date()}
-          onChange={(date: Date) => {
-            handleDateChange(date);
-          }}
-        />
-        <button disabled={error.puppyName.length > 0} onClick={handleClick}>
-          Skapa
-        </button>
+        <InputWrapper>
+          <label htmlFor='name'>Valpens namn</label>
+          <Input type='text' name='name' onChange={handleChange} />
+          {error.puppyName && <small>{error.puppyName}</small>}
+          <label>
+            Valpens födelsedatum
+            <Calendar
+              minDate={dt.minus({ weeks: 7, days: 6 }).toJSDate()}
+              maxDate={dt.toJSDate()}
+              showWeekNumbers={true}
+              value={new Date()}
+              onChange={(date: Date) => {
+                handleDateChange(date);
+              }}
+            />
+          </label>
+          <Button disabled={error.puppyName.length > 0} onClick={handleClick}>
+            Skapa
+          </Button>
+        </InputWrapper>
       </form>
-    </>
+    </AddPuppyContainer>
   );
 };
 

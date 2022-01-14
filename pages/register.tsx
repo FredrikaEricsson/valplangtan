@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import { Button, Headline, Input } from "../styles/global";
 
 const RegisterPage = () => {
   const [input, setInput] = useState({
@@ -95,18 +96,18 @@ const RegisterPage = () => {
 
   return (
     <>
-      <h1>Registrera</h1>
+      <Headline>Registrera</Headline>
       <form action=''>
         <label htmlFor='username'>Användarnamn</label>
-        <input type='text' name='username' onChange={handleChange} />
+        <Input type='text' name='username' onChange={handleChange} />
         {inputError.username && <small>{inputError.username}</small>}
         <label htmlFor='email'>Email</label>
-        <input type='email' name='email' onChange={handleChange} />
+        <Input type='email' name='email' onChange={handleChange} />
         {inputError.email && <small>{inputError.email}</small>}
         <label htmlFor='password'>Lösenord</label>
-        <input type='password' name='password' onChange={handleChange} />
+        <Input type='password' name='password' onChange={handleChange} />
         {inputError.password && <small>{inputError.password}</small>}
-        <button
+        <Button
           type='submit'
           onClick={handleClick}
           disabled={
@@ -116,8 +117,9 @@ const RegisterPage = () => {
           }
         >
           Registrera
-        </button>
+        </Button>
       </form>
+      {confirmationMessage && <small>{confirmationMessage}</small>}
       <Link href='/login'>
         <a>Logga in</a>
       </Link>

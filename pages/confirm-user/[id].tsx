@@ -22,7 +22,7 @@ const ConfirmationPage = () => {
         );
         setConfirmUserResponse({
           loading: true,
-          message: confirmUserResponse.data,
+          message: "Ditt konto är bekräftat! Du kan nu logga in",
         });
       } catch (error) {
         setConfirmUserResponse({ loading: true, message: "Nånting gick fel" });
@@ -34,7 +34,7 @@ const ConfirmationPage = () => {
   return (
     <>
       {confirmUserResponse.loading ? (
-        <h2>{confirmUserResponse.message}</h2>
+        <p>{confirmUserResponse.message}</p>
       ) : (
         <div>Laddar...</div>
       )}

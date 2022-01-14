@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 export const MainContainer = styled.main`
-  padding: 5% 10%;
+  padding: 5% 5%;
   background-color: ${colors.colorLightBlue};
   height: 100vh;
 `;
@@ -94,4 +94,16 @@ export const Headline = styled.h1`
   font-family: "Patrick Hand", "Open sans";
   font-size: 1.7rem;
   letter-spacing: 0.2rem;
+`;
+
+export const Input = styled.input`
+  border: 1px solid ${colors.colorDarkGrey};
+  border-radius: 5px;
+  padding: 2%;
+`;
+
+export const Button = styled.button`
+  border: 1px solid ${colors.colorDarkGrey};
+  border-radius: 5px;
+  padding: 2%;
 `;

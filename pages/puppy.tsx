@@ -54,6 +54,9 @@ const PuppyPage = () => {
       } catch (error: any) {
         if (error.response.status === 401) {
           return router.push("/login");
+        }
+        if (error.response.status === 403) {
+          return router.push("/add-new-puppy");
         } else {
           return router.push("/error");
         }
