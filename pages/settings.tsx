@@ -6,6 +6,12 @@ import "react-calendar/dist/Calendar.css";
 import DeletePuppyModal from "../components/deletePuppyModal";
 import router from "next/router";
 import { Headline } from "../styles/global";
+import {
+  CalendarWrapper,
+  InputWrapper,
+  SettingsContainer,
+  SettingsWrapper,
+} from "../styles/settings";
 
 interface IUser {
   _id: string;
@@ -177,69 +183,82 @@ const SettingsPage = () => {
   }
 
   return (
-    <>
+    <SettingsContainer>
       <Headline>Inställningar</Headline>
-      <label htmlFor='userName'>Användarnamn</label>
-      <input
-        type='text'
-        name='userName'
-        required
-        minLength={2}
-        maxLength={20}
-        placeholder='Användarnamn'
-        value={user.userName}
-        onChange={handleInputChange}
-      />
-      {inputError.username && <small>{inputError.username}</small>}
-      <label htmlFor='email'>Email</label>
-      <input
-        type='email'
-        name='email'
-        required
-        minLength={2}
-        maxLength={20}
-        placeholder='Email'
-        value={user.email}
-        onChange={handleInputChange}
-      />
-      {inputError.email && <small>{inputError.email}</small>}
-      <label htmlFor='puppyName'>Valpens namn</label>
-      <input
-        type='text'
-        name='puppyName'
-        required
-        minLength={2}
-        maxLength={20}
-        placeholder='Valpens namn'
-        value={user.puppy.name}
-        onChange={handleInputChange}
-      />
-      {inputError.puppyName && <small>{inputError.puppyName}</small>}
-      <Calendar
-        minDate={dt.minus({ weeks: 7, days: 6 }).toJSDate()}
-        maxDate={dt.toJSDate()}
-        showWeekNumbers={true}
-        value={user.puppy.birthDate.toJSDate()}
-        onChange={(date: Date) => {
-          handleDateChange(date);
-        }}
-      />
-      <button
-        disabled={
-          inputError.username.length > 0 ||
-          inputError.email.length > 0 ||
-          inputError.puppyName.length > 0
-        }
-        onClick={handleClick}
-      >
-        Spara
-      </button>
-      {message && <small>{message}</small>}
-      <button onClick={toggleDeleteModal}>Radera valp</button>
-      {showModal ? (
-        <DeletePuppyModal deletePuppy={deletePuppy}></DeletePuppyModal>
-      ) : null}
-    </>
+      <SettingsWrapper>
+        <InputWrapper>
+          <label htmlFor='userName'>Användarnamn</label>
+          <input
+            type='text'
+            name='userName'
+            required
+            minLength={2}
+            maxLength={20}
+            placeholder='Användarnamn'
+            value={user.userName}
+            onChange={handleInputChange}
+          />
+          {inputError.username && <small>{inputError.username}</small>}
+        </InputWrapper>
+        <InputWrapper>
+          <label htmlFor='email'>Email</label>
+          <input
+            type='email'
+            name='email'
+            required
+            minLength={2}
+            maxLength={20}
+            placeholder='Email'
+            value={user.email}
+            onChange={handleInputChange}
+          />
+          {inputError.email && <small>{inputError.email}</small>}
+        </InputWrapper>
+        <InputWrapper>
+          <label htmlFor='puppyName'>Valpens namn</label>
+          <input
+            type='text'
+            name='puppyName'
+            required
+            minLength={2}
+            maxLength={20}
+            placeholder='Valpens namn'
+            value={user.puppy.name}
+            onChange={handleInputChange}
+          />
+          {inputError.puppyName && <small>{inputError.puppyName}</small>}
+        </InputWrapper>
+        <CalendarWrapper>
+          <label>
+            Valpens födelsedatum
+            <Calendar
+              minDate={dt.minus({ weeks: 7, days: 6 }).toJSDate()}
+              maxDate={dt.toJSDate()}
+              showWeekNumbers={true}
+              value={user.puppy.birthDate.toJSDate()}
+              onChange={(date: Date) => {
+                handleDateChange(date);
+              }}
+            />
+          </label>
+        </CalendarWrapper>
+        <button
+          disabled={
+            inputError.username.length > 0 ||
+            inputError.email.length > 0 ||
+            inputError.puppyName.length > 0
+          }
+          onClick={handleClick}
+        >
+          Spara
+        </button>
+        {message && <small>{message}</small>}
+        <button onClick={toggleDeleteModal}>Radera valp</button>
+        {showModal ? (
+          <DeletePuppyModal deletePuppy={deletePuppy}></DeletePuppyModal>
+        ) : null}
+      </SettingsWrapper>
+    </SettingsContainer>
   );
 };
 
