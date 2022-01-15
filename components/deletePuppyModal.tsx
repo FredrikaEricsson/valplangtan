@@ -1,28 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
+import { Button } from "../styles/global";
 
 interface IDeletePuppyModalProps {
-  deletePuppy(confirmed: boolean): void;
+  deletePuppy(): void;
+  toggleDeleteModal(): void;
 }
 
 const DeletePuppyModal = (props: IDeletePuppyModalProps) => {
-  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault;
-    props.deletePuppy(true);
-  };
-
-  const handleExit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault;
-    props.deletePuppy(false);
-  };
-
   return (
     <>
       <div>
-        Är du säker på att du vill radera din valp? Detta kommer också ta bort
+        Är du säker på att du vill radera din valp? Detta kommer även ta bort
         alla dina checklistor och går inte att återställa
       </div>
-      <button onClick={handleDelete}>Radera</button>
-      <button onClick={handleExit}>Avbryt</button>
+      <Button onClick={props.deletePuppy}>Radera</Button>
+      <Button onClick={props.toggleDeleteModal}>Avbryt</Button>
     </>
   );
 };

@@ -104,13 +104,9 @@ const AddNewPuppy = () => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      let response = await axios.post(
-        "http://localhost:3001/add-new-puppy",
-        puppy,
-        {
-          withCredentials: true,
-        }
-      );
+      await axios.post("http://localhost:3001/add-new-puppy", puppy, {
+        withCredentials: true,
+      });
       return router.push("/puppy");
     } catch (error: any) {
       if (error.response.status === 401) {

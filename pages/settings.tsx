@@ -12,6 +12,7 @@ import {
   SettingsContainer,
   SettingsWrapper,
 } from "../styles/settings";
+import { DeletePuppyModalContainer } from "../styles/delete-puppy-modal";
 
 interface IUser {
   _id: string;
@@ -168,22 +169,17 @@ const SettingsPage = () => {
   };
 
   const toggleDeleteModal = async () => {
-    setShowModal(true);
+    setShowModal(!showModal);
   };
 
-  const deletePuppy = async (confirmed: boolean) => {
-    if (confirmed === false) {
-    }
-    let deletePuppyResponse = await axios.put(
-      "http://localhost:3001/delete-puppy",
-      user,
-      {
+  const deletePuppy = async () => {
+    try {
+      await axios.put("http://localhost:3001/delete-puppy", user, {
         withCredentials: true,
-      }
-    );
-    if (deletePuppyResponse.data) {
-      setShowModal(false);
+      });
       return router.push("/add-new-puppy");
+    } catch (error: any) {
+      setMessage("Nånting gick fel. Försök igen senare");
     }
   };
 
@@ -264,7 +260,12 @@ const SettingsPage = () => {
         {message && <small>{message}</small>}
         <Button onClick={toggleDeleteModal}>Radera valp</Button>
         {showModal ? (
-          <DeletePuppyModal deletePuppy={deletePuppy}></DeletePuppyModal>
+          <DeletePuppyModalContainer>
+            <DeletePuppyModal
+              deletePuppy={deletePuppy}
+              toggleDeleteModal={toggleDeleteModal}
+            ></DeletePuppyModal>
+          </DeletePuppyModalContainer>
         ) : null}
       </SettingsWrapper>
     </SettingsContainer>

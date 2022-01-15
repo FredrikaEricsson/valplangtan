@@ -19,6 +19,8 @@ const Navbar = () => {
         });
         if (userResponse.data.puppy.name !== "") {
           setUserHasPuppy(true);
+        } else {
+          setUserHasPuppy(false);
         }
         setUserIsLoggedIn(true);
         setIsOpen(false);
