@@ -1,6 +1,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
+import { Headline, Input, Button } from "../styles/global";
 
 interface IEmail {
   email: string;
@@ -36,11 +37,12 @@ const ForgotPasswordPage = () => {
 
   return (
     <>
-      <h1>Glömt lösenord</h1>
+      <Headline>Glömt lösenord</Headline>
       <p>Ange den mailadress som användes vid registering</p>
       <label htmlFor='email'>Email</label>
-      <input type='email' name='email' onChange={handleChange}></input>
-      <button onClick={handleClick}></button>
+      <Input type='email' name='email' onChange={handleChange}></Input>
+      <Button onClick={handleClick}>Skicka</Button>
+      {resetMessage ? <div>{resetMessage}</div> : null}
       <Link href='/login'>
         <a>Logga in</a>
       </Link>

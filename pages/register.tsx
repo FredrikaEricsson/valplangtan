@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { Button, Headline, Input } from "../styles/global";
+import { RegisterPageWrapper, InputWrapper } from "../styles/register";
 
 const RegisterPage = () => {
   const [input, setInput] = useState({
@@ -17,6 +18,9 @@ const RegisterPage = () => {
   });
 
   const [confirmationMessage, setConfirmationMessage] = useState<string>();
+
+  const [registrationSuccessful, setRegistrationSuccessful] =
+    useState<boolean>(false);
 
   const firstUpdate = useRef(true);
 
@@ -89,36 +93,45 @@ const RegisterPage = () => {
       setConfirmationMessage(
         "Registrering klar! Ett mail med en bekräftelselänk har skickats till dig!"
       );
+      setRegistrationSuccessful(true);
     } catch (error: any) {
-      setConfirmationMessage("Nånting gick fel! Försök igen senare!");
+      if (error.response.status === 400) {
+        return setConfirmationMessage("Emailen finns redan registrerad");
+      } else {
+        setConfirmationMessage("Nånting gick fel! Försök igen senare!");
+      }
     }
   };
 
   return (
-    <>
+    <RegisterPageWrapper>
       <Headline>Registrera</Headline>
-      <form action=''>
-        <label htmlFor='username'>Användarnamn</label>
-        <Input type='text' name='username' onChange={handleChange} />
-        {inputError.username && <small>{inputError.username}</small>}
-        <label htmlFor='email'>Email</label>
-        <Input type='email' name='email' onChange={handleChange} />
-        {inputError.email && <small>{inputError.email}</small>}
-        <label htmlFor='password'>Lösenord</label>
-        <Input type='password' name='password' onChange={handleChange} />
-        {inputError.password && <small>{inputError.password}</small>}
-        <Button
-          type='submit'
-          onClick={handleClick}
-          disabled={
-            inputError.username.length > 0 ||
-            inputError.email.length > 0 ||
-            inputError.password.length > 0
-          }
-        >
-          Registrera
-        </Button>
-      </form>
+      {!registrationSuccessful ? (
+        <form action=''>
+          <InputWrapper>
+            <label htmlFor='username'>Användarnamn</label>
+            <Input type='text' name='username' onChange={handleChange} />
+            {inputError.username && <small>{inputError.username}</small>}
+            <label htmlFor='email'>Email</label>
+            <Input type='email' name='email' onChange={handleChange} />
+            {inputError.email && <small>{inputError.email}</small>}
+            <label htmlFor='password'>Lösenord</label>
+            <Input type='password' name='password' onChange={handleChange} />
+            {inputError.password && <small>{inputError.password}</small>}
+            <Button
+              type='submit'
+              onClick={handleClick}
+              disabled={
+                inputError.username.length > 0 ||
+                inputError.email.length > 0 ||
+                inputError.password.length > 0
+              }
+            >
+              Registrera
+            </Button>
+          </InputWrapper>
+        </form>
+      ) : null}
       {confirmationMessage && <small>{confirmationMessage}</small>}
       <Link href='/login'>
         <a>Logga in</a>
@@ -126,7 +139,7 @@ const RegisterPage = () => {
       <Link href='/forgot-password'>
         <a>Glömt lösenord?</a>
       </Link>
-    </>
+    </RegisterPageWrapper>
   );
 };
 

@@ -3,6 +3,8 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Headline, Input, Button } from "../styles/global";
+import { LoginPageWrapper } from "../styles/login";
+import { InputWrapper } from "../styles/add-new-puppy";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -82,7 +84,7 @@ const LoginPage = () => {
     } catch (error: any) {
       console.log(error);
       if (error.response.status === 403) {
-        return setErrorMessage("Användaren är inte verifierad");
+        return setErrorMessage("Din email är inte verifierad");
       }
       if (error.response.status === 401) {
         return setErrorMessage("Fel email eller lösenord");
@@ -93,23 +95,25 @@ const LoginPage = () => {
   };
 
   return (
-    <>
+    <LoginPageWrapper>
       <Headline>Logga in</Headline>
       <form action=''>
-        <label htmlFor='email'>Email</label>
-        <Input type='email' name='email' onChange={handleChange} />
-        {inputError.email && <small>{inputError.email}</small>}
-        <label htmlFor='password'>Lösenord</label>
-        <Input type='password' name='password' onChange={handleChange} />
-        {inputError.password && <small>{inputError.password}</small>}
-        <Button
-          disabled={
-            inputError.email.length > 0 || inputError.password.length > 0
-          }
-          onClick={handleClick}
-        >
-          Logga in
-        </Button>
+        <InputWrapper>
+          <label htmlFor='email'>Email</label>
+          <Input type='email' name='email' onChange={handleChange} />
+          {inputError.email && <small>{inputError.email}</small>}
+          <label htmlFor='password'>Lösenord</label>
+          <Input type='password' name='password' onChange={handleChange} />
+          {inputError.password && <small>{inputError.password}</small>}
+          <Button
+            disabled={
+              inputError.email.length > 0 || inputError.password.length > 0
+            }
+            onClick={handleClick}
+          >
+            Logga in
+          </Button>
+        </InputWrapper>
       </form>
       {errorMessage ? <div>{errorMessage}</div> : null}
       <Link href='/register'>
@@ -118,7 +122,7 @@ const LoginPage = () => {
       <Link href='/forgot-password'>
         <a>Glömt lösenord?</a>
       </Link>
-    </>
+    </LoginPageWrapper>
   );
 };
 

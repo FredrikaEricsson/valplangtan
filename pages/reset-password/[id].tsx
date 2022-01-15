@@ -29,11 +29,8 @@ const ResetPage = () => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      const resetPasswordResponse = await axios.put(
-        "http://localhost:3001/reset-password",
-        updatedUser
-      );
-      setResetPasswordMessage(resetPasswordResponse.data);
+      await axios.put("http://localhost:3001/reset-password", updatedUser);
+      setResetPasswordMessage("Ditt lösenord är ändrat. Du kan nu logga in");
     } catch (error) {
       setResetPasswordMessage("Nånting gick fel. Försök igen senare");
     }

@@ -29,11 +29,6 @@ interface ITaskListProps {
 const TaskList = (props: ITaskListProps) => {
   const [currentTasks, setCurrentTasks] = useState<ITask[]>([]);
   const [previousTasks, setPreviousTasks] = useState<ITask[]>([]);
-  const [showSlides, setShowSlides] = useState<boolean>(false);
-
-  const toggleSlides = () => {
-    setShowSlides(!showSlides);
-  };
 
   useEffect(() => {
     let filteredCurrentTasks = props.tasks.filter((task) => {
@@ -50,44 +45,48 @@ const TaskList = (props: ITaskListProps) => {
 
   return (
     <>
-      <CurrentTaskListContainer>
-        <Headline>Veckans checklista</Headline>
-        <div>
-          {currentTasks.map((currentTask) => {
-            return (
-              <div key={currentTask._id}>
-                <TaskItem
-                  _id={currentTask._id}
-                  week={currentTask.week}
-                  isDone={currentTask.isDone}
-                  title={currentTask.title}
-                  slides={currentTask.slides}
-                  changeTaskStatus={props.changeTaskStatus}
-                ></TaskItem>
-              </div>
-            );
-          })}
-        </div>
-      </CurrentTaskListContainer>
-      <PrevTaskListContainer>
-        <Headline>Föregående veckor</Headline>
-        <div>
-          {previousTasks.map((previousTask) => {
-            return (
-              <div key={previousTask._id}>
-                <TaskItem
-                  _id={previousTask._id}
-                  week={previousTask.week}
-                  isDone={previousTask.isDone}
-                  title={previousTask.title}
-                  slides={previousTask.slides}
-                  changeTaskStatus={props.changeTaskStatus}
-                ></TaskItem>
-              </div>
-            );
-          })}
-        </div>
-      </PrevTaskListContainer>
+      {currentTasks.length > 0 ? (
+        <CurrentTaskListContainer>
+          <Headline>Veckans checklista</Headline>
+          <div>
+            {currentTasks.map((currentTask) => {
+              return (
+                <div key={currentTask._id}>
+                  <TaskItem
+                    _id={currentTask._id}
+                    week={currentTask.week}
+                    isDone={currentTask.isDone}
+                    title={currentTask.title}
+                    slides={currentTask.slides}
+                    changeTaskStatus={props.changeTaskStatus}
+                  ></TaskItem>
+                </div>
+              );
+            })}
+          </div>
+        </CurrentTaskListContainer>
+      ) : null}
+      {previousTasks.length > 0 ? (
+        <PrevTaskListContainer>
+          <Headline>Föregående veckor</Headline>
+          <div>
+            {previousTasks.map((previousTask) => {
+              return (
+                <div key={previousTask._id}>
+                  <TaskItem
+                    _id={previousTask._id}
+                    week={previousTask.week}
+                    isDone={previousTask.isDone}
+                    title={previousTask.title}
+                    slides={previousTask.slides}
+                    changeTaskStatus={props.changeTaskStatus}
+                  ></TaskItem>
+                </div>
+              );
+            })}
+          </div>
+        </PrevTaskListContainer>
+      ) : null}
     </>
   );
 };

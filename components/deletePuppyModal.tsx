@@ -5,8 +5,6 @@ interface IDeletePuppyModalProps {
 }
 
 const DeletePuppyModal = (props: IDeletePuppyModalProps) => {
-  const [deletePuppyConfirmed, setDeletePuppyConfirmed] = useState();
-
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault;
     props.deletePuppy(true);

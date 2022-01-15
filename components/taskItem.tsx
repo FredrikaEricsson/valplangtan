@@ -5,18 +5,6 @@ import {
   SlideContainer,
   TaskItemContainer,
 } from "../styles/checkList";
-interface ITask {
-  _id: string;
-  week: number;
-  isDone: boolean;
-  title: string;
-  slides: [
-    {
-      _id: string;
-      description: string;
-    }
-  ];
-}
 
 interface ITaskProps {
   _id: string;
@@ -30,10 +18,6 @@ interface ITaskProps {
     }
   ];
   changeTaskStatus(editedTask: { id: string; isDone: boolean }): void;
-}
-interface ISlide {
-  _id: string;
-  description: string;
 }
 
 const TaskItem = (props: ITaskProps) => {
