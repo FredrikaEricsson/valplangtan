@@ -6,6 +6,7 @@ import { Hamburger, Header, Logo, MenuLink, Headline } from "../styles/global";
 
 const Navbar = () => {
   const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>();
+  const [userHasPuppy, setUserHasPuppy] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const getRouter = useRouter();
@@ -13,9 +14,12 @@ const Navbar = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        await axios.get("http://localhost:3001/get-user", {
+        let userResponse = await axios.get("http://localhost:3001/get-user", {
           withCredentials: true,
         });
+        if (userResponse.data.puppy.name !== "") {
+          setUserHasPuppy(true);
+        }
         setUserIsLoggedIn(true);
         setIsOpen(false);
       } catch (error) {
@@ -52,15 +56,23 @@ const Navbar = () => {
       <Header isOpen={isOpen}>
         {userIsLoggedIn ? (
           <>
-            <Link href='/puppy' passHref>
-              <MenuLink>Min valp</MenuLink>
-            </Link>
-            <Link href='/checklist' passHref>
-              <MenuLink>Checklista</MenuLink>
-            </Link>
-            <Link href='/settings' passHref>
-              <MenuLink>Inställningar</MenuLink>
-            </Link>
+            {userHasPuppy ? (
+              <>
+                <Link href='/puppy' passHref>
+                  <MenuLink>Min valp</MenuLink>
+                </Link>
+                <Link href='/checklist' passHref>
+                  <MenuLink>Checklista</MenuLink>
+                </Link>
+                <Link href='/settings' passHref>
+                  <MenuLink>Inställningar</MenuLink>
+                </Link>
+              </>
+            ) : (
+              <Link href='/add-new-puppy' passHref>
+                <MenuLink>Ny valp</MenuLink>
+              </Link>
+            )}
             <Link href='/' passHref>
               <MenuLink onClick={handleClick}>Logga ut</MenuLink>
             </Link>
