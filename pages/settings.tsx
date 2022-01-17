@@ -64,7 +64,7 @@ const SettingsPage = () => {
         });
       } catch (error: any) {
         if (error.response.status === 401) {
-          return router.push("/login");
+          return router.push("/");
         }
         if (error.response.status === 403) {
           return router.push("/add-new-puppy");
@@ -161,7 +161,7 @@ const SettingsPage = () => {
       setMessage("Dina ändringar är sparade");
     } catch (error: any) {
       if (error.response.status === 401) {
-        return router.push("/login");
+        return router.push("/");
       } else {
         setMessage("Nånting gick fel. Försök igen senare");
       }

@@ -34,7 +34,7 @@ const ChecklistPage = () => {
         setPuppyAge(puppyAgeResponse.data + 1);
       } catch (error: any) {
         if (error.response.status === 401) {
-          return router.push("/login");
+          return router.push("/");
         }
         if (error.response.status === 403) {
           return router.push("/add-new-puppy");
@@ -59,7 +59,7 @@ const ChecklistPage = () => {
         setTasks(checklistResponse.data);
       } catch (error: any) {
         if (error.response.status === 401) {
-          return router.push("/login");
+          return router.push("/");
         } else {
           return router.push("/error");
         }

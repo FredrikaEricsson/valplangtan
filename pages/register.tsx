@@ -2,7 +2,11 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { Button, Headline, Input } from "../styles/global";
-import { RegisterPageWrapper, InputWrapper } from "../styles/register";
+import {
+  RegisterPageWrapper,
+  InputWrapper,
+  RegisterPageContainer,
+} from "../styles/register";
 
 const RegisterPage = () => {
   const [input, setInput] = useState({
@@ -104,42 +108,44 @@ const RegisterPage = () => {
   };
 
   return (
-    <RegisterPageWrapper>
-      <Headline>Registrera</Headline>
-      {!registrationSuccessful ? (
-        <form action=''>
-          <InputWrapper>
-            <label htmlFor='username'>Användarnamn</label>
-            <Input type='text' name='username' onChange={handleChange} />
-            {inputError.username && <small>{inputError.username}</small>}
-            <label htmlFor='email'>Email</label>
-            <Input type='email' name='email' onChange={handleChange} />
-            {inputError.email && <small>{inputError.email}</small>}
-            <label htmlFor='password'>Lösenord</label>
-            <Input type='password' name='password' onChange={handleChange} />
-            {inputError.password && <small>{inputError.password}</small>}
-            <Button
-              type='submit'
-              onClick={handleClick}
-              disabled={
-                inputError.username.length > 0 ||
-                inputError.email.length > 0 ||
-                inputError.password.length > 0
-              }
-            >
-              Registrera
-            </Button>
-          </InputWrapper>
-        </form>
-      ) : null}
-      {confirmationMessage && <small>{confirmationMessage}</small>}
-      <Link href='/login'>
-        <a>Logga in</a>
-      </Link>
-      <Link href='/forgot-password'>
-        <a>Glömt lösenord?</a>
-      </Link>
-    </RegisterPageWrapper>
+    <RegisterPageContainer>
+      <RegisterPageWrapper>
+        <Headline>Registrera</Headline>
+        {!registrationSuccessful ? (
+          <form action=''>
+            <InputWrapper>
+              <label htmlFor='username'>Användarnamn</label>
+              <Input type='text' name='username' onChange={handleChange} />
+              {inputError.username && <small>{inputError.username}</small>}
+              <label htmlFor='email'>Email</label>
+              <Input type='email' name='email' onChange={handleChange} />
+              {inputError.email && <small>{inputError.email}</small>}
+              <label htmlFor='password'>Lösenord</label>
+              <Input type='password' name='password' onChange={handleChange} />
+              {inputError.password && <small>{inputError.password}</small>}
+              <Button
+                type='submit'
+                onClick={handleClick}
+                disabled={
+                  inputError.username.length > 0 ||
+                  inputError.email.length > 0 ||
+                  inputError.password.length > 0
+                }
+              >
+                Registrera
+              </Button>
+            </InputWrapper>
+          </form>
+        ) : null}
+        {confirmationMessage && <small>{confirmationMessage}</small>}
+        <Link href='/'>
+          <a>Logga in</a>
+        </Link>
+        <Link href='/forgot-password'>
+          <a>Glömt lösenord?</a>
+        </Link>
+      </RegisterPageWrapper>
+    </RegisterPageContainer>
   );
 };
 

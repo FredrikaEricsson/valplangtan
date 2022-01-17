@@ -45,9 +45,9 @@ const TaskItem = (props: ITaskProps) => {
             <input
               type='checkbox'
               id={props._id}
-              data-testid='checkbox'
               checked={isDone}
               onChange={handleChange}
+              data-testid='checkbox'
             ></input>
           </CheckboxContainer>
           <div>

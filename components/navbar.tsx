@@ -80,7 +80,7 @@ const Navbar = () => {
             </Link>
           </>
         ) : (
-          <Link href='/login' passHref>
+          <Link href='/' passHref>
             <MenuLink>Logga in</MenuLink>
           </Link>
         )}

@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Headline, Input, Button } from "../styles/global";
 import { LoginPageWrapper } from "../styles/login";
-import { InputWrapper } from "../styles/add-new-puppy";
+import { InputWrapper } from "../styles/login";
 
-const LoginPage = () => {
+const Login = () => {
   const router = useRouter();
 
   const [input, setInput] = useState({
@@ -96,7 +96,6 @@ const LoginPage = () => {
 
   return (
     <LoginPageWrapper>
-      <Headline>Logga in</Headline>
       <form action=''>
         <InputWrapper>
           <label htmlFor='email'>Email</label>
@@ -126,4 +125,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Login;

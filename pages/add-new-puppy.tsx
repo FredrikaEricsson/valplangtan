@@ -5,7 +5,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Button, Input, Headline } from "../styles/global";
-import { AddPuppyContainer, InputWrapper } from "../styles/add-new-puppy";
+import { AddPuppyContainer, FormWrapper } from "../styles/add-new-puppy";
 
 interface INewPuppy {
   birthDate: DateTime;
@@ -58,7 +58,7 @@ const AddNewPuppy = () => {
         }
       } catch (error: any) {
         if (error.response.status === 401) {
-          return router.push("/login");
+          return router.push("/");
         } else {
           return router.push("/error");
         }
@@ -110,7 +110,7 @@ const AddNewPuppy = () => {
       return router.push("/puppy");
     } catch (error: any) {
       if (error.response.status === 401) {
-        return router.push("/login");
+        return router.push("/");
       } else {
         return router.push("/error");
       }
@@ -122,7 +122,7 @@ const AddNewPuppy = () => {
       <Headline>Ny valp</Headline>
 
       <form action=''>
-        <InputWrapper>
+        <FormWrapper>
           <label htmlFor='name'>Valpens namn</label>
           <Input type='text' name='name' onChange={handleChange} />
           {error.puppyName && <small>{error.puppyName}</small>}
@@ -141,7 +141,7 @@ const AddNewPuppy = () => {
           <Button disabled={error.puppyName.length > 0} onClick={handleClick}>
             Skapa
           </Button>
-        </InputWrapper>
+        </FormWrapper>
       </form>
     </AddPuppyContainer>
   );
