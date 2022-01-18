@@ -5,6 +5,8 @@ import {
   SlideContainer,
   TaskItemContainer,
 } from "../styles/checkList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 interface ITaskProps {
   _id: string;
@@ -51,12 +53,19 @@ const TaskItem = (props: ITaskProps) => {
             ></input>
           </CheckboxContainer>
           <div>
-            <span onClick={toggleSlides}>{props.title}</span>
+            <span>{props.title}</span>
+          </div>
+          <div onClick={toggleSlides}>
+            <FontAwesomeIcon icon={faQuestionCircle} />
           </div>
         </TaskItemContainer>
         {showSlides ? (
           <SlideContainer>
-            <Slide slides={props.slides} toggleSlides={toggleSlides}></Slide>
+            <Slide
+              title={props.title}
+              slides={props.slides}
+              toggleSlides={toggleSlides}
+            ></Slide>
           </SlideContainer>
         ) : null}
       </div>

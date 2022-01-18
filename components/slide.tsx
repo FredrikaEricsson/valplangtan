@@ -16,6 +16,7 @@ import {
 
 interface ISlideProps {
   slides: [{ _id: string; description: string }];
+  title: string;
   toggleSlides(): void;
 }
 const Slide = (props: ISlideProps) => {
@@ -46,6 +47,7 @@ const Slide = (props: ISlideProps) => {
         <CloseButton onClick={props.toggleSlides}>
           <FontAwesomeIcon icon={faTimesCircle} />
         </CloseButton>
+        <h2>{props.title}</h2>
         <DescriptionContainer>
           <div>{props.slides[index].description}</div>
         </DescriptionContainer>
