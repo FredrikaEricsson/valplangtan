@@ -4,6 +4,7 @@ import { colors } from "../assets/colors";
 export const PuppyPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
   a {
     color: black;
     align-self: center;
@@ -14,8 +15,20 @@ export const PuppyPageWrapper = styled.div`
 export const HeaderWrapper = styled.div`
   display: flex;
   text-align: center;
-  margin-top: 5%%;
   padding: 5%;
+  @media screen and (min-width: 1024px) {
+    padding: 2% 5%;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+export const ImageUpdateWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+  }
 `;
 
 export const ImageWrapper = styled.div`
@@ -25,6 +38,9 @@ export const ImageWrapper = styled.div`
   padding: 10% 10% 0% 10%;
   background-color: white;
   border-radius: 4%;
+  @media screen and (min-width: 1024px) {
+    margin: 2%;
+  }
 `;
 export const UpdateWrapper = styled.div`
   background-color: ${colors.colorLightOrange};
@@ -33,4 +49,15 @@ export const UpdateWrapper = styled.div`
   padding: 5%;
   border-radius: 4%;
   text-align: center;
+  @media screen and (min-width: 1024px) {
+    display: flex;
+    margin: 2%;
+    padding: 5%;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    p {
+      font-size: 18pt;
+    }
+  }
 `;

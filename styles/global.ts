@@ -28,6 +28,9 @@ export const MainContainer = styled.main`
   padding: 20% 5%;
   background-color: ${colors.colorLightBlue};
   min-height: 91vh;
+  @media screen and (min-width: 1024px) {
+    padding: 5% 5%;
+  }
 `;
 
 export const HeadingWrapper = styled.div`
@@ -94,6 +97,9 @@ export const MenuLink = styled.a`
   color: black;
   transition: color 0.2s;
   font-size: 0.9rem;
+  @media screen and (min-width: 1024px) {
+    font-size: 1.2rem;
+  }
   &:hover {
     color: ${colors.colorDarkOrange};
   }
@@ -104,12 +110,18 @@ export const Headline = styled.h1`
   font-size: 1.7rem;
   letter-spacing: 0.2rem;
   color: black;
+  @media screen and (min-width: 1024px) {
+    font-size: 2rem;
+  }
 `;
 
 export const Input = styled.input`
   border: 2px solid ${colors.colorLightOrange};
   border-radius: 5px;
   padding: 2%;
+  @media screen and (min-width: 1024px) {
+    padding: 1%;
+  }
 `;
 
 export const Button = styled.button`
@@ -117,4 +129,7 @@ export const Button = styled.button`
   border-radius: 5px;
   padding: 2%;
   background-color: ${colors.colorLightOrange};
+  @media screen and (min-width: 1024px) {
+    padding: 1%;
+  }
 `;

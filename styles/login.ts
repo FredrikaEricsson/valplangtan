@@ -10,6 +10,9 @@ export const LoginPageWrapper = styled.div`
   a {
     margin: 3%;
     color: black;
+    @media screen and (min-width: 1024px) {
+      margin: 2%;
+    }
   }
 `;
 
@@ -18,12 +21,23 @@ export const InputWrapper = styled.div`
   flex-direction: column;
   margin-top: 3%;
   width: 100%;
+  @media screen and (min-width: 1024px) {
+    margin-top: 5%;
+  }
   input {
     margin-top: 2%;
     margin-bottom: 5%;
+    @media screen and (min-width: 1024px) {
+      width: 40%;
+      align-self: center;
+      margin-bottom: 3%;
+    }
   }
   button {
     width: 50%;
     align-self: center;
+    @media screen and (min-width: 1024px) {
+      width: 15%;
+    }
   }
 `;

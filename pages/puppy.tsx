@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { DateTime } from "luxon";
 import {
   HeaderWrapper,
+  ImageUpdateWrapper,
   ImageWrapper,
   PuppyPageWrapper,
   UpdateWrapper,
@@ -78,12 +79,14 @@ const PuppyPage = () => {
             Din valp {puppy.name} är inne i vecka {puppy.ageInWeeks}
           </Headline>
         </HeaderWrapper>
-        <ImageWrapper>
-          <Image src={puppyImage} alt='puppy'></Image>
-        </ImageWrapper>
-        <UpdateWrapper>
-          <p>{update?.content}</p>
-        </UpdateWrapper>
+        <ImageUpdateWrapper>
+          <ImageWrapper>
+            <Image src={puppyImage} alt='puppy'></Image>
+          </ImageWrapper>
+          <UpdateWrapper>
+            <p>{update?.content}</p>
+          </UpdateWrapper>
+        </ImageUpdateWrapper>
         <Link href='/checklist'>
           <a>Se veckans checklista</a>
         </Link>
