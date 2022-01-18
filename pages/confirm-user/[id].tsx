@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { ConfirmUserWrapper } from "../../styles/confirm-user";
+import { Headline } from "../../styles/global";
+import Link from "next/link";
 
 const ConfirmationPage = () => {
   const router = useRouter();
@@ -32,13 +35,18 @@ const ConfirmationPage = () => {
   }, [id]);
 
   return (
-    <>
+    <ConfirmUserWrapper>
       {confirmUserResponse.loading ? (
-        <p>{confirmUserResponse.message}</p>
+        <>
+          <Headline>{confirmUserResponse.message}</Headline>
+          <Link href='/'>
+            <a>Logga in</a>
+          </Link>
+        </>
       ) : (
         <div>Laddar...</div>
       )}
-    </>
+    </ConfirmUserWrapper>
   );
 };
 

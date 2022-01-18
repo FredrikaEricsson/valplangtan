@@ -6,22 +6,32 @@ export const SlideWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  h2 {
+    font-family: "Patrick Hand", "Open sans";
+    margin-left: 10%;
+    margin-right: 10%;
+  }
 `;
 
 export const DescriptionContainer = styled.div`
   margin-top: 10%;
-  height: 70%;
+  height: 60%;
   margin-left: 10%;
   margin-right: 10%;
 `;
 
 export const CloseButton = styled.button`
   font-size: 1.5rem;
-  border-color: ${colors.colorDarkGrey};
+  border-color: white;
   border-style: none;
   align-self: flex-end;
+  background-color: white;
+  color: ${colors.colorDarkOrange};
 `;
-export const ToggleButtonWrapper = styled.div``;
+export const ToggleButtonWrapper = styled.div`
+  height: 30px;
+  margin-top: 10%;
+`;
 
 export const PrevButton = styled.button`
   font-size: 1.5rem;
@@ -29,6 +39,8 @@ export const PrevButton = styled.button`
   border-style: none;
   position: absolute;
   left: 3em;
+  background-color: white;
+  color: ${colors.colorDarkOrange};
 `;
 
 export const NextButton = styled.button`
@@ -37,4 +49,6 @@ export const NextButton = styled.button`
   border-style: none;
   position: absolute;
   right: 3em;
+  background-color: white;
+  color: ${colors.colorDarkOrange};
 `;

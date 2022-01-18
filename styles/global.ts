@@ -11,20 +11,23 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: 'Source sans pro', serif;
+    
   }
   body {
     overflow-x:hidden;
     margin: 0;
+   
   }
   html {
     scroll-behavior: smooth;
+   
 
   }
 `;
 export const MainContainer = styled.main`
-  padding: 5% 5%;
+  padding: 20% 5%;
   background-color: ${colors.colorLightBlue};
-  height: 100vh;
+  min-height: 91vh;
 `;
 
 export const HeadingWrapper = styled.div`
@@ -33,7 +36,7 @@ export const HeadingWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background-color: ${colors.colorLightGrey};
+  background-color: white;
 `;
 
 export const Header = styled.div`
@@ -52,13 +55,19 @@ export const Header = styled.div`
 
 export const Logo = styled.a`
   padding: 1rem 0;
-  color: ${colors.colorDarkGrey};
+  color: black;
   text-decoration: none;
   font-weight: 800;
-  font-size: 1.7rem;
+
   span {
     font-weight: 300;
     font-size: 1.3rem;
+  }
+  h1 {
+    font-size: 2rem;
+    font-family: "Patrick Hand", "Open sans";
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
   }
 `;
 export const Hamburger = styled.div`
@@ -68,7 +77,7 @@ export const Hamburger = styled.div`
   span {
     height: 2px;
     width: 25px;
-    background: ${colors.colorDarkGrey};
+    background: black;
     margin-bottom: 4px;
     border-radius: 5px;
   }
@@ -82,11 +91,11 @@ export const MenuLink = styled.a`
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  color: ${colors.colorDarkGrey};
+  color: black;
   transition: color 0.2s;
   font-size: 0.9rem;
   &:hover {
-    color: ${colors.colorBrown};
+    color: ${colors.colorDarkOrange};
   }
 `;
 
@@ -94,16 +103,18 @@ export const Headline = styled.h1`
   font-family: "Patrick Hand", "Open sans";
   font-size: 1.7rem;
   letter-spacing: 0.2rem;
+  color: black;
 `;
 
 export const Input = styled.input`
-  border: 1px solid ${colors.colorDarkGrey};
+  border: 2px solid ${colors.colorLightOrange};
   border-radius: 5px;
   padding: 2%;
 `;
 
 export const Button = styled.button`
-  border: 1px solid ${colors.colorDarkGrey};
+  border: 1px solid ${colors.colorDarkOrange}};
   border-radius: 5px;
   padding: 2%;
+  background-color: ${colors.colorLightOrange};
 `;

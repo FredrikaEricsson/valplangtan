@@ -8,9 +8,10 @@ import {
   PuppyPageWrapper,
   UpdateWrapper,
 } from "../styles/puppy";
-import { Headline } from "../styles/global";
+import { Button, Headline } from "../styles/global";
 import Image from "next/image";
 import puppyImage from "../public/puppy.png";
+import Link from "next/link";
 interface IPuppy {
   birthDate: string;
   ageInWeeks: number;
@@ -83,6 +84,9 @@ const PuppyPage = () => {
         <UpdateWrapper>
           <p>{update?.content}</p>
         </UpdateWrapper>
+        <Link href='/checklist'>
+          <a>Se veckans checklista</a>
+        </Link>
       </PuppyPageWrapper>
     </>
   );

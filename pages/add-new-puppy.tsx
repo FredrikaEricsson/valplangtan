@@ -5,7 +5,12 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Button, Input, Headline } from "../styles/global";
-import { AddPuppyContainer, FormWrapper } from "../styles/add-new-puppy";
+import {
+  AddPuppyContainer,
+  AddPuppyWrapper,
+  CalendarWrapper,
+  FormWrapper,
+} from "../styles/add-new-puppy";
 
 interface INewPuppy {
   birthDate: DateTime;
@@ -120,29 +125,32 @@ const AddNewPuppy = () => {
   return (
     <AddPuppyContainer>
       <Headline>Ny valp</Headline>
-
-      <form action=''>
-        <FormWrapper>
-          <label htmlFor='name'>Valpens namn</label>
-          <Input type='text' name='name' onChange={handleChange} />
-          {error.puppyName && <small>{error.puppyName}</small>}
-          <label>
-            Valpens födelsedatum
-            <Calendar
-              minDate={dt.minus({ weeks: 7, days: 6 }).toJSDate()}
-              maxDate={dt.toJSDate()}
-              showWeekNumbers={true}
-              value={new Date()}
-              onChange={(date: Date) => {
-                handleDateChange(date);
-              }}
-            />
-          </label>
-          <Button disabled={error.puppyName.length > 0} onClick={handleClick}>
-            Skapa
-          </Button>
-        </FormWrapper>
-      </form>
+      <AddPuppyWrapper>
+        <form action=''>
+          <FormWrapper>
+            <label htmlFor='name'>Valpens namn</label>
+            <Input type='text' name='name' onChange={handleChange} />
+            {error.puppyName && <small>{error.puppyName}</small>}
+            <label>
+              Valpens födelsedatum
+              <CalendarWrapper>
+                <Calendar
+                  minDate={dt.minus({ weeks: 7, days: 6 }).toJSDate()}
+                  maxDate={dt.toJSDate()}
+                  showWeekNumbers={true}
+                  value={new Date()}
+                  onChange={(date: Date) => {
+                    handleDateChange(date);
+                  }}
+                />
+              </CalendarWrapper>
+            </label>
+            <Button disabled={error.puppyName.length > 0} onClick={handleClick}>
+              Skapa
+            </Button>
+          </FormWrapper>
+        </form>
+      </AddPuppyWrapper>
     </AddPuppyContainer>
   );
 };

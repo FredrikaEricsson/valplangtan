@@ -1,4 +1,6 @@
+import { FooterContainer } from "../styles/footer";
 import { HeadingWrapper, MainContainer } from "../styles/global";
+import Footer from "./footer";
 import Navbar from "./navbar";
 
 const Layout = ({ children }: any) => {
@@ -9,6 +11,9 @@ const Layout = ({ children }: any) => {
       </HeadingWrapper>
 
       <MainContainer>{children}</MainContainer>
+      <FooterContainer>
+        <Footer></Footer>
+      </FooterContainer>
     </>
   );
 };

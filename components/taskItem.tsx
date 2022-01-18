@@ -1,7 +1,8 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Slide from "./slide";
 import {
-  CheckboxContainer,
+  TitleCheckboxContainer,
+  QuestionMarkContainer,
   SlideContainer,
   TaskItemContainer,
 } from "../styles/checkList";
@@ -43,7 +44,7 @@ const TaskItem = (props: ITaskProps) => {
     <>
       <div key={props._id}>
         <TaskItemContainer>
-          <CheckboxContainer>
+          <TitleCheckboxContainer>
             <input
               type='checkbox'
               id={props._id}
@@ -51,13 +52,14 @@ const TaskItem = (props: ITaskProps) => {
               onChange={handleChange}
               data-testid='checkbox'
             ></input>
-          </CheckboxContainer>
-          <div>
-            <span>{props.title}</span>
-          </div>
-          <div onClick={toggleSlides}>
+
+            <div>
+              <span>{props.title}</span>
+            </div>
+          </TitleCheckboxContainer>
+          <QuestionMarkContainer onClick={toggleSlides}>
             <FontAwesomeIcon icon={faQuestionCircle} />
-          </div>
+          </QuestionMarkContainer>
         </TaskItemContainer>
         {showSlides ? (
           <SlideContainer>

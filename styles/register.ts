@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../assets/colors";
 
 export const RegisterPageContainer = styled.div`
   display: flex;
@@ -8,6 +9,7 @@ export const RegisterPageContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: space-evenly;
+
   form {
     width: 75%;
   }

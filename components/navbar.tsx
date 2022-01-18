@@ -47,7 +47,7 @@ const Navbar = () => {
     <>
       <Link href='/' passHref>
         <Logo>
-          <Headline>Valplängtan</Headline>
+          <h1>Valplängtan</h1>
         </Logo>
       </Link>
       <Hamburger onClick={() => setIsOpen(!isOpen)}>

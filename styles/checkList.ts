@@ -4,9 +4,9 @@ import { slideInUp } from "react-animations";
 const slideAnimation = keyframes`${slideInUp}`;
 
 export const ChecklistContainer = styled.div`
-  background-color: ${colors.colorBeige};
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 5%;
-  border-radius: 4%;
+  border-radius: 5px;
   margin-top: 10%;
 `;
 
@@ -14,23 +14,39 @@ export const SlideContainer = styled.div`
   animation: 0.3s ${slideAnimation};
   position: absolute;
   z-index: 1;
-  background-color: ${colors.colorLightGrey};
+  background-color: white;
   left: 18px;
-  top: 200px;
+  top: 30%;
   width: 90%;
-  height: 50%;
+  height: fit-content;
   padding: 5%;
-  border-radius: 4%;
-  border: 2px solid ${colors.colorDarkGrey};
+  border-radius: 5px;
+  border: 2px solid black;
 `;
 
 export const TaskItemContainer = styled.div`
   display: flex;
   align-items: center;
-  padding-top: 5%;
+  padding: 3%;
+  background-color: rgba(255, 255, 255, 0.7);
+  margin-top: 4%;
+  border-radius: 5px;
 `;
-export const CheckboxContainer = styled.div`
+
+export const TitleCheckboxContainer = styled.div`
+  display: flex;
+  align-items: center;
   padding-right: 5%;
+  display: flex;
+  width: 88%;
+  input {
+    margin-right: 4%;
+  }
+`;
+
+export const QuestionMarkContainer = styled.div`
+  font-size: 15pt;
+  color: ${colors.colorDarkOrange};
 `;
 
 export const CurrentTaskListContainer = styled.div`
