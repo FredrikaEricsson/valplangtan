@@ -99,10 +99,20 @@ const Login = () => {
       <form action=''>
         <InputWrapper>
           <label htmlFor='email'>Email</label>
-          <Input type='email' name='email' onChange={handleChange} />
+          <Input
+            type='email'
+            data-testid='emailInput'
+            name='email'
+            onChange={handleChange}
+          />
           {inputError.email && <small>{inputError.email}</small>}
           <label htmlFor='password'>Lösenord</label>
-          <Input type='password' name='password' onChange={handleChange} />
+          <Input
+            type='password'
+            data-testid='passwordInput'
+            name='password'
+            onChange={handleChange}
+          />
           {inputError.password && <small>{inputError.password}</small>}
           <Button
             disabled={
