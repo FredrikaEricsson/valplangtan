@@ -282,12 +282,14 @@ const SettingsPage = () => {
           <Button onClick={toggleDeleteModal}>Radera valp</Button>
         </DeleteButtonWrapper>
         {showModal ? (
-          <DeletePuppyModalContainer>
-            <DeletePuppyModal
-              deletePuppy={deletePuppy}
-              toggleDeleteModal={toggleDeleteModal}
-            ></DeletePuppyModal>
-          </DeletePuppyModalContainer>
+          <Overlay>
+            <DeletePuppyModalContainer>
+              <DeletePuppyModal
+                deletePuppy={deletePuppy}
+                toggleDeleteModal={toggleDeleteModal}
+              ></DeletePuppyModal>
+            </DeletePuppyModalContainer>
+          </Overlay>
         ) : null}
       </SettingsWrapper>
     </SettingsContainer>

@@ -63,13 +63,15 @@ const TaskItem = (props: ITaskProps) => {
           </QuestionMarkContainer>
         </TaskItemContainer>
         {showSlides ? (
-          <SlideContainer>
-            <Slide
-              title={props.title}
-              slides={props.slides}
-              toggleSlides={toggleSlides}
-            ></Slide>
-          </SlideContainer>
+          <Overlay>
+            <SlideContainer>
+              <Slide
+                title={props.title}
+                slides={props.slides}
+                toggleSlides={toggleSlides}
+              ></Slide>
+            </SlideContainer>
+          </Overlay>
         ) : null}
       </div>
     </>
