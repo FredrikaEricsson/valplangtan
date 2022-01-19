@@ -18,6 +18,7 @@ import {
 } from "../styles/settings";
 import { DeletePuppyModalContainer } from "../styles/delete-puppy-modal";
 import { Overlay } from "../styles/slide";
+import Link from "next/link";
 
 interface IUser {
   _id: string;
@@ -241,6 +242,12 @@ const SettingsPage = () => {
               />
               {inputError.puppyName && <small>{inputError.puppyName}</small>}
             </InputWrapper>
+            <p>
+              Vill du byta lösenord? Klicka{" "}
+              <Link href='/forgot-password'>
+                <a>här</a>
+              </Link>
+            </p>
           </InputContainer>
           <CalendarButtonContainer>
             <CalendarWrapper>

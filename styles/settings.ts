@@ -31,6 +31,9 @@ export const InputContainer = styled.div`
   @media screen and (min-width: 1024px) {
     width: 49%;
   }
+  p {
+    margin-top: 2%;
+  }
 `;
 
 export const InputWrapper = styled.div`
