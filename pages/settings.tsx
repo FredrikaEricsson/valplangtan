@@ -13,8 +13,11 @@ import {
   SettingsWrapper,
   FormWrapper,
   DeleteButtonWrapper,
+  InputContainer,
+  CalendarButtonContainer,
 } from "../styles/settings";
 import { DeletePuppyModalContainer } from "../styles/delete-puppy-modal";
+import { Overlay } from "../styles/slide";
 
 interface IUser {
   _id: string;
@@ -194,72 +197,78 @@ const SettingsPage = () => {
       <Headline>Inställningar</Headline>
       <SettingsWrapper>
         <FormWrapper>
-          <InputWrapper>
-            <label htmlFor='userName'>Användarnamn</label>
-            <Input
-              type='text'
-              name='userName'
-              required
-              minLength={2}
-              maxLength={20}
-              placeholder='Användarnamn'
-              value={user.userName}
-              onChange={handleInputChange}
-            />
-            {inputError.username && <small>{inputError.username}</small>}
-          </InputWrapper>
-          <InputWrapper>
-            <label htmlFor='email'>Email</label>
-            <Input
-              type='email'
-              name='email'
-              required
-              minLength={2}
-              maxLength={20}
-              placeholder='Email'
-              value={user.email}
-              onChange={handleInputChange}
-            />
-            {inputError.email && <small>{inputError.email}</small>}
-          </InputWrapper>
-          <InputWrapper>
-            <label htmlFor='puppyName'>Valpens namn</label>
-            <Input
-              type='text'
-              name='puppyName'
-              required
-              minLength={2}
-              maxLength={20}
-              placeholder='Valpens namn'
-              value={user.puppy.name}
-              onChange={handleInputChange}
-            />
-            {inputError.puppyName && <small>{inputError.puppyName}</small>}
-          </InputWrapper>
-          <CalendarWrapper>
-            <label>
-              Valpens födelsedatum
-              <Calendar
-                minDate={dt.minus({ weeks: 7, days: 6 }).toJSDate()}
-                maxDate={dt.toJSDate()}
-                showWeekNumbers={true}
-                value={user.puppy.birthDate.toJSDate()}
-                onChange={(date: Date) => {
-                  handleDateChange(date);
-                }}
+          <InputContainer>
+            <InputWrapper>
+              <label htmlFor='userName'>Användarnamn</label>
+              <Input
+                type='text'
+                name='userName'
+                required
+                minLength={2}
+                maxLength={20}
+                placeholder='Användarnamn'
+                value={user.userName}
+                onChange={handleInputChange}
               />
-            </label>
-          </CalendarWrapper>
-          <Button
-            disabled={
-              inputError.username.length > 0 ||
-              inputError.email.length > 0 ||
-              inputError.puppyName.length > 0
-            }
-            onClick={handleClick}
-          >
-            Spara
-          </Button>
+              {inputError.username && <small>{inputError.username}</small>}
+            </InputWrapper>
+            <InputWrapper>
+              <label htmlFor='email'>Email</label>
+              <Input
+                type='email'
+                name='email'
+                required
+                minLength={2}
+                maxLength={20}
+                placeholder='Email'
+                value={user.email}
+                onChange={handleInputChange}
+              />
+              {inputError.email && <small>{inputError.email}</small>}
+            </InputWrapper>
+
+            <InputWrapper>
+              <label htmlFor='puppyName'>Valpens namn</label>
+              <Input
+                type='text'
+                name='puppyName'
+                required
+                minLength={2}
+                maxLength={20}
+                placeholder='Valpens namn'
+                value={user.puppy.name}
+                onChange={handleInputChange}
+              />
+              {inputError.puppyName && <small>{inputError.puppyName}</small>}
+            </InputWrapper>
+          </InputContainer>
+          <CalendarButtonContainer>
+            <CalendarWrapper>
+              <label className='calendarLabel'>
+                Valpens födelsedatum
+                <Calendar
+                  minDate={dt.minus({ weeks: 7, days: 6 }).toJSDate()}
+                  maxDate={dt.toJSDate()}
+                  showWeekNumbers={true}
+                  value={user.puppy.birthDate.toJSDate()}
+                  onChange={(date: Date) => {
+                    handleDateChange(date);
+                  }}
+                />
+              </label>
+            </CalendarWrapper>
+
+            <Button
+              disabled={
+                inputError.username.length > 0 ||
+                inputError.email.length > 0 ||
+                inputError.puppyName.length > 0
+              }
+              onClick={handleClick}
+            >
+              Spara
+            </Button>
+          </CalendarButtonContainer>
           {message && <small>{message}</small>}
         </FormWrapper>
         <DeleteButtonWrapper>

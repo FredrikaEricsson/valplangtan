@@ -56,5 +56,10 @@ export const InputWrapper = styled.div`
       width: 15%;
       margin-top: 2%;
     }
+    
   }
+  label {
+    @media screen and (min-width: 1024px) {
+      font-size: 1.2rem;
+    }
 `;

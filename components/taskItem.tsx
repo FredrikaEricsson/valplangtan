@@ -8,6 +8,7 @@ import {
 } from "../styles/checkList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { Overlay } from "../styles/slide";
 
 interface ITaskProps {
   _id: string;

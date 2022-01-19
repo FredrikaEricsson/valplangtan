@@ -25,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 export const MainContainer = styled.main`
-  padding: 20% 5%;
+  padding: 10% 5%;
   background-color: ${colors.colorLightBlue};
   min-height: 91vh;
   @media screen and (min-width: 1024px) {
@@ -120,7 +120,9 @@ export const Input = styled.input`
   border-radius: 5px;
   padding: 2%;
   @media screen and (min-width: 1024px) {
-    padding: 1%;
+    padding: 2%;
+    font-size: 1rem;
+    max-height: 50px;
   }
 `;
 
@@ -131,5 +133,6 @@ export const Button = styled.button`
   background-color: ${colors.colorLightOrange};
   @media screen and (min-width: 1024px) {
     padding: 1%;
+    font-size: 1rem
   }
 `;

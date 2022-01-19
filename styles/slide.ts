@@ -10,7 +10,21 @@ export const SlideWrapper = styled.div`
     font-family: "Patrick Hand", "Open sans";
     margin-left: 10%;
     margin-right: 10%;
+    @media screen and (min-width: 1024px) {
+      margin-left: 5%;
+      margin-right: 5%;
+      font-size: 2rem;
+    }
   }
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.5);
 `;
 
 export const DescriptionContainer = styled.div`
@@ -18,6 +32,12 @@ export const DescriptionContainer = styled.div`
   height: 60%;
   margin-left: 10%;
   margin-right: 10%;
+  @media screen and (min-width: 1024px) {
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 1.3rem;
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -27,6 +47,9 @@ export const CloseButton = styled.button`
   align-self: flex-end;
   background-color: white;
   color: ${colors.colorDarkOrange};
+  @media screen and (min-width: 1024px) {
+    font-size: 2rem;
+  }
 `;
 export const ToggleButtonWrapper = styled.div`
   height: 30px;
@@ -41,6 +64,9 @@ export const PrevButton = styled.button`
   left: 3em;
   background-color: white;
   color: ${colors.colorDarkOrange};
+  @media screen and (min-width: 1024px) {
+    font-size: 2rem;
+  }
 `;
 
 export const NextButton = styled.button`
@@ -51,4 +77,7 @@ export const NextButton = styled.button`
   right: 3em;
   background-color: white;
   color: ${colors.colorDarkOrange};
+  @media screen and (min-width: 1024px) {
+    font-size: 2rem;
+  }
 `;

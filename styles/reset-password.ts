@@ -7,4 +7,8 @@ export const ResetPasswordContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  @media screen and (min-width: 1024px) {
+    margin-top: 0%;
+    height: 30vh;
+  }
 `;

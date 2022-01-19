@@ -33,6 +33,11 @@ export const InputWrapper = styled.div`
       margin-bottom: 3%;
     }
   }
+  label {
+    @media screen and (min-width: 1024px) {
+      font-size: 1.2rem;
+    }
+  }
   button {
     width: 50%;
     align-self: center;
