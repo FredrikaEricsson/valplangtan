@@ -8,7 +8,7 @@ import Link from "next/link";
 const ConfirmationPage = () => {
   const router = useRouter();
   let { id } = router.query;
-  console.log(id);
+
   const [confirmUserResponse, setConfirmUserResponse] = useState({
     loading: false,
     message: "",

@@ -82,7 +82,6 @@ const Login = () => {
         return router.push("/puppy");
       }
     } catch (error: any) {
-      console.log(error);
       if (error.response.status === 403) {
         return setErrorMessage("Din email är inte verifierad");
       }
