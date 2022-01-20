@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 import "react-calendar/dist/Calendar.css";
 import DeletePuppyModal from "../components/deletePuppyModal";
 import router from "next/router";
-import { Headline, Input, Button } from "../styles/global";
+import { Headline, Input, Button, ErrorMessageStyle } from "../styles/global";
 import {
   CalendarWrapper,
   InputWrapper,
@@ -211,7 +211,9 @@ const SettingsPage = () => {
                 value={user.userName}
                 onChange={handleInputChange}
               />
-              {inputError.username && <small>{inputError.username}</small>}
+              {inputError.username && (
+                <ErrorMessageStyle>{inputError.username}</ErrorMessageStyle>
+              )}
             </InputWrapper>
             <InputWrapper>
               <label htmlFor='email'>Email</label>
@@ -225,7 +227,9 @@ const SettingsPage = () => {
                 value={user.email}
                 onChange={handleInputChange}
               />
-              {inputError.email && <small>{inputError.email}</small>}
+              {inputError.email && (
+                <ErrorMessageStyle>{inputError.email}</ErrorMessageStyle>
+              )}
             </InputWrapper>
 
             <InputWrapper>
@@ -240,7 +244,9 @@ const SettingsPage = () => {
                 value={user.puppy.name}
                 onChange={handleInputChange}
               />
-              {inputError.puppyName && <small>{inputError.puppyName}</small>}
+              {inputError.puppyName && (
+                <ErrorMessageStyle>{inputError.puppyName}</ErrorMessageStyle>
+              )}
             </InputWrapper>
             <p>
               Vill du byta lösenord? Klicka{" "}
@@ -264,7 +270,6 @@ const SettingsPage = () => {
                 />
               </label>
             </CalendarWrapper>
-
             <Button
               disabled={
                 inputError.username.length > 0 ||
@@ -274,9 +279,9 @@ const SettingsPage = () => {
               onClick={handleClick}
             >
               Spara
-            </Button>
+            </Button>{" "}
+            {message && <ErrorMessageStyle>{message}</ErrorMessageStyle>}
           </CalendarButtonContainer>
-          {message && <small>{message}</small>}
         </FormWrapper>
         <DeleteButtonWrapper>
           <Button onClick={toggleDeleteModal}>Radera valp</Button>

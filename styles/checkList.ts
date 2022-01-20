@@ -8,6 +8,8 @@ export const ChecklistContainer = styled.div`
   padding: 5%;
   border-radius: 5px;
   margin-top: 10%;
+  box-shadow: 3px 3px 0px ${colors.colorDarkBlue};
+  border: 1px solid ${colors.colorDarkBlue};
   @media screen and (min-width: 1024px) {
     margin-top: 0%;
     padding: 0% 5%;
@@ -41,6 +43,8 @@ export const TaskItemContainer = styled.div`
   background-color: rgba(255, 255, 255, 0.7);
   margin-top: 4%;
   border-radius: 5px;
+  border: 2px solid ${colors.colorLightOrange};
+  box-shadow: 2px 2px 0px ${colors.colorLightOrange};
   @media screen and (min-width: 1024px) {
     font-size: 1.3rem;
     padding: 2%;

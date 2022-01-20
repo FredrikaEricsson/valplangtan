@@ -119,6 +119,10 @@ export const Input = styled.input`
   border: 2px solid ${colors.colorLightOrange};
   border-radius: 5px;
   padding: 2%;
+  box-shadow: 2px 2px 0px ${colors.colorLightOrange};
+  input:-internal-autofill-selected {
+    background-color: white;
+  }
   @media screen and (min-width: 1024px) {
     padding: 2%;
     font-size: 1rem;
@@ -127,12 +131,19 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  border: 1px solid ${colors.colorDarkOrange}};
+  border: 2px solid ${colors.colorDarkOrange}};
   border-radius: 5px;
   padding: 2%;
   background-color: ${colors.colorLightOrange};
+  box-shadow: 2px 2px 0px ${colors.colorDarkOrange};
+  cursor: pointer;
   @media screen and (min-width: 1024px) {
     padding: 1%;
     font-size: 1rem
   }
+`;
+
+export const ErrorMessageStyle = styled.small`
+  color: ${colors.colorBrown};
+  text-decoration: underline ${colors.colorDarkOrange};
 `;

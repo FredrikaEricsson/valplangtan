@@ -1,7 +1,12 @@
 import axios from "axios";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { Button, Headline, Input } from "../../styles/global";
+import {
+  Button,
+  ErrorMessageStyle,
+  Headline,
+  Input,
+} from "../../styles/global";
 import { ResetPasswordContainer } from "../../styles/reset-password";
 
 interface IUpdatedUser {
@@ -70,7 +75,9 @@ const ResetPage = () => {
       <Headline>Återställ lösenord</Headline>
       <label htmlFor='newPassword'>Nytt lösenord</label>
       <Input type='password' name='newPassword' onChange={handleChange}></Input>
-      {errorPasswordMessage ? <p>{errorPasswordMessage}</p> : null}
+      {errorPasswordMessage ? (
+        <ErrorMessageStyle>{errorPasswordMessage}</ErrorMessageStyle>
+      ) : null}
       <Button disabled={errorPasswordMessage?.length > 0} onClick={handleClick}>
         Spara
       </Button>

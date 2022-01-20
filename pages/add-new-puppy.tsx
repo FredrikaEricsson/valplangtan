@@ -4,7 +4,7 @@ import "react-calendar/dist/Calendar.css";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { Button, Input, Headline } from "../styles/global";
+import { Button, Input, Headline, ErrorMessageStyle } from "../styles/global";
 import {
   AddPuppyContainer,
   AddPuppyWrapper,
@@ -130,7 +130,9 @@ const AddNewPuppy = () => {
           <FormWrapper>
             <label htmlFor='name'>Valpens namn</label>
             <Input type='text' name='name' onChange={handleChange} />
-            {error.puppyName && <small>{error.puppyName}</small>}
+            {error.puppyName && (
+              <ErrorMessageStyle>{error.puppyName}</ErrorMessageStyle>
+            )}
             <label>
               Valpens födelsedatum
               <CalendarWrapper>

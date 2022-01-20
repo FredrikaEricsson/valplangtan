@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { Headline, Input, Button } from "../styles/global";
+import { Headline, Input, Button, ErrorMessageStyle } from "../styles/global";
 import { LoginPageWrapper } from "../styles/login";
 import { InputWrapper } from "../styles/login";
 
@@ -104,7 +104,9 @@ const Login = () => {
             name='email'
             onChange={handleChange}
           />
-          {inputError.email && <small>{inputError.email}</small>}
+          {inputError.email && (
+            <ErrorMessageStyle>{inputError.email}</ErrorMessageStyle>
+          )}
           <label htmlFor='password'>Lösenord</label>
           <Input
             type='password'
@@ -112,7 +114,9 @@ const Login = () => {
             name='password'
             onChange={handleChange}
           />
-          {inputError.password && <small>{inputError.password}</small>}
+          {inputError.password && (
+            <ErrorMessageStyle>{inputError.password}</ErrorMessageStyle>
+          )}
           <Button
             disabled={
               inputError.email.length > 0 || inputError.password.length > 0
@@ -123,7 +127,9 @@ const Login = () => {
           </Button>
         </InputWrapper>
       </form>
-      {errorMessage ? <div>{errorMessage}</div> : null}
+      {errorMessage ? (
+        <ErrorMessageStyle>{errorMessage}</ErrorMessageStyle>
+      ) : null}
       <Link href='/register'>
         <a>Registera</a>
       </Link>

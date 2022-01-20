@@ -11,6 +11,7 @@ export const AddPuppyContainer = styled.div`
   }
   h1 {
     text-align: center;
+    margin-bottom: 15px;
   }
 `;
 
@@ -21,6 +22,8 @@ export const AddPuppyWrapper = styled.div`
   align-items: center;
   justify-content: space-evenly;
   padding: 5%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
   @media screen and (min-width: 1024px) {
     padding: 2%;
   }
@@ -54,9 +57,11 @@ export const FormWrapper = styled.div`
 export const CalendarWrapper = styled.div`
   margin-top: 3%;
   margin-bottom: 5%;
+
   .react-calendar {
     margin-top: 1%;
     border: 2px solid ${colors.colorLightOrange};
     border-radius: 5px;
+    box-shadow: 2px 2px 0px ${colors.colorLightOrange};
   }
 `;

@@ -26,14 +26,16 @@ export const InputWrapper = styled.div`
   }
   input {
     margin-top: 2%;
-    margin-bottom: 5%;
+    margin-bottom: 1%;
     @media screen and (min-width: 1024px) {
       width: 40%;
       align-self: center;
-      margin-bottom: 3%;
+      margin-top: 1%;
+      margin-bottom: 1%;
     }
   }
   label {
+    margin-top: 3%;
     @media screen and (min-width: 1024px) {
       font-size: 1.2rem;
     }
@@ -41,6 +43,7 @@ export const InputWrapper = styled.div`
   button {
     width: 50%;
     align-self: center;
+    margin-top: 3%;
     @media screen and (min-width: 1024px) {
       width: 15%;
     }

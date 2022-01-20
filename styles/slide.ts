@@ -47,6 +47,11 @@ export const CloseButton = styled.button`
   align-self: flex-end;
   background-color: white;
   color: ${colors.colorDarkOrange};
+  cursor: pointer;
+  transition: color 0.2s;
+  &:hover {
+    color: ${colors.colorYellow};
+  }
   @media screen and (min-width: 1024px) {
     font-size: 2rem;
   }
@@ -64,6 +69,11 @@ export const PrevButton = styled.button`
   left: 3em;
   background-color: white;
   color: ${colors.colorDarkOrange};
+  cursor: pointer;
+  transition: color 0.2s;
+  &:hover {
+    color: ${colors.colorYellow};
+  }
   @media screen and (min-width: 1024px) {
     font-size: 2rem;
   }
@@ -77,6 +87,11 @@ export const NextButton = styled.button`
   right: 3em;
   background-color: white;
   color: ${colors.colorDarkOrange};
+  cursor: pointer;
+  transition: color 0.2s;
+  &:hover {
+    color: ${colors.colorYellow};
+  }
   @media screen and (min-width: 1024px) {
     font-size: 2rem;
   }

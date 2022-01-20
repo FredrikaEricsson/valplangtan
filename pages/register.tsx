@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { Button, Headline, Input } from "../styles/global";
+import { Button, ErrorMessageStyle, Headline, Input } from "../styles/global";
 import {
   RegisterPageWrapper,
   InputWrapper,
@@ -116,13 +116,19 @@ const RegisterPage = () => {
             <InputWrapper>
               <label htmlFor='username'>Användarnamn</label>
               <Input type='text' name='username' onChange={handleChange} />
-              {inputError.username && <small>{inputError.username}</small>}
+              {inputError.username && (
+                <ErrorMessageStyle>{inputError.username}</ErrorMessageStyle>
+              )}
               <label htmlFor='email'>Email</label>
               <Input type='email' name='email' onChange={handleChange} />
-              {inputError.email && <small>{inputError.email}</small>}
+              {inputError.email && (
+                <ErrorMessageStyle>{inputError.email}</ErrorMessageStyle>
+              )}
               <label htmlFor='password'>Lösenord</label>
               <Input type='password' name='password' onChange={handleChange} />
-              {inputError.password && <small>{inputError.password}</small>}
+              {inputError.password && (
+                <ErrorMessageStyle>{inputError.password}</ErrorMessageStyle>
+              )}
               <Button
                 type='submit'
                 onClick={handleClick}
@@ -137,7 +143,9 @@ const RegisterPage = () => {
             </InputWrapper>
           </form>
         ) : null}
-        {confirmationMessage && <small>{confirmationMessage}</small>}
+        {confirmationMessage && (
+          <ErrorMessageStyle>{confirmationMessage}</ErrorMessageStyle>
+        )}
         <Link href='/'>
           <a>Logga in</a>
         </Link>
